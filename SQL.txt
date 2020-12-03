@@ -1,0 +1,38 @@
+Creating budget form#######################################################
+CREATE TABLE budget(
+	id int(20) NOT NULL AUTO_INCREMENT UNIQUE,
+    catname varchar(30) NOT NULL,
+    budget varchar(30) NOT NULL,
+    amount varchar(30) NOT null,
+  	addid varchar(30),
+    PRIMARY KEY (id)
+
+);
+
+
+
+#############################################Creating ROLE and EMPLOYEE DETAILS#########################################
+
+CREATE TABLE role
+(
+    id int NOT NULL AUTO_INCREMENT UNIQUE,
+	name varchar(30) ,
+    mobile varchar(30),
+   	address varchar(30),
+    emergency_contact_no varchar(30),
+    email varchar(30),
+    role INT(20),
+    PRIMARY KEY(id)
+);
+ALTER TABLE table_name
+  RENAME TO new_table_name;
+
+
+####################Creating role name####################################################
+CREATE TABLE role
+(
+    role int(20) NOT null, UNIQUE,
+    rolename varchar(20)
+    
+);
+
