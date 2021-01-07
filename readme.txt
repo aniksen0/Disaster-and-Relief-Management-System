@@ -1,0 +1,1 @@
+This system will provide when the disaster will strike(such as cyclone, tornedo) and this system will help to monitor the current status.

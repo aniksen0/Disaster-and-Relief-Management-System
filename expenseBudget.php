@@ -1,75 +1,75 @@
-
 <?php
-/**
-// * Created by PhpStorm.
-// * User: anik
-// * Date: 11/27/2020
-// * Time: 1:59 PM
-// */
+require_once "connection.php";
 session_start();
-require "connection.php";
-if (isset($_POST['id']) && isset($_POST['product'])&&isset($_POST['budget'])&&isset($_POST['amount']) )
+
+//&& isset($_POST['sellerid'])
+//&&is_numeric($_POST['sellerid'])
+if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['cost'])&& isset($_POST['expdetails']))
 {
-    if (is_numeric($_POST['id'])&&is_numeric($_POST['amount'])&&is_numeric($_POST['budget']))
-    {
+    if (is_numeric($_POST['id'])&&is_numeric($_POST['cost'])) {
+        $sql1 = "INSERT INTO expense VALUES (:id,:catid,:name,:remarks,:addid,:cost,:sellerid)";
 
-        $sql= "INSERT INTO budget VALUES(:id, :catname,:budget,:amount, :addid ,:catid )";
-        $stmt= $conn->prepare($sql);
-        $stmt->execute(array(
-            ':id'=>htmlentities($_POST['id']) ,
-            ':catname'=>htmlentities($_POST['product']),
-            ':budget'=>htmlentities($_POST['budget']),
-            ':amount'=>htmlentities($_POST['amount']),
-            ':addid'=>2,
-            ':catid'=>htmlentities($_POST['catid'])
-//       ############# need to work on that addid..........#################
-        ));
-        header("Location:Budget.php");
-        $_SESSION['success']="Successful";
+        $data = $conn->prepare($sql1);
+
+        $data->execute(array(
+        ':id' => $_POST['id'],
+        ':catid' => $_POST['catid'],
+        ':name' => $_POST['name'],
+        ':remarks' => $_POST['expdetails'],
+        ':addid' => 2,
+        ':cost' => $_POST['cost'],
+        ':sellerid' => 300
+    ));
+
+
+        $_SESSION['success'] = "Inserted";
+        header("Location:expenseBudget.php");
         return;
-
-    }
-    else
+}
+else
     {
         $_SESSION['error']="Please insert appropriate data";
-        header("Location:Budget.php");
+        header("Location:expenseBudget.php");
         return;
-    }
-
-
-}
-$sql2="SELECT id,catname,budget,amount,addid from budget";
-$data = $conn->query($sql2);
-$rows = $data->fetchALL(PDO::FETCH_ASSOC);
-
-
-    $amountCount=0;
-    $budgetCount=0;
-    $Category=sizeof($rows);
-
-    foreach ($rows as $row)
-    {
-        $amountCount= $amountCount+$row['amount'];
-        $budgetCount=$budgetCount+$row['budget'];
 
     }
-$querycatname="SELECT * FROM categoryname";
-$catnamedata=$conn->query($querycatname);
-$catnames=$catnamedata->fetchAll(PDO::FETCH_ASSOC);
-$options="";
-foreach ($catnames as $catname)
-{
-    $options=$options."<option value=".$catname['id'].">".$catname['catname'].$catname['id']."</option>";
+
 }
 
+//
+//
+//
+
+//if (isset($_POST['id'])&&isset($_post['catid'])&&isset($_post['name'])&&isset($_post['cost'])&&isset($_post['expdetails'])) {
+//
+//
+//    $query = "INSERT INTO expense VALUES (:id,:catid,:name,:remarks,:addid,:cost,:sellerid)";
+//    $data = $conn->prepare($query);
+//    $data->execute(array(
+//        ':id' => $_POST['id'],
+//        ':catid' => $_POST['catid'],
+//        ':name' => $_POST['name'],
+//        ':remarks' => $_POST['expdetails'],
+//        ':addid' => 2,
+//        ':cost' => $_POST['cost'],
+//        ':sellerid' => 300
+//    ));
+//}
+//    else
+//    {
+//        $_SESSION['error']="same problem";
+//    }
+
+$sql2="Select * from expense";
+$data2=$conn->query($sql2);
+$rows = $data2->fetchALL(PDO::FETCH_ASSOC);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/font/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font/css/all.min.css"crossorigin="anonymous">
 
     <link rel="stylesheeet" href="boot/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mainSidebar.css" >
@@ -79,7 +79,7 @@ foreach ($catnames as $catname)
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <title>Relief Dashboard</title>
+    <title>Dashboard</title>
 </head>
 <body id="body">
 <div class="container1">
@@ -89,7 +89,7 @@ foreach ($catnames as $catname)
         </div>
 
         <div class="navbar--right">
-            <img src="img/logo.svg" alt="mainlogo" id="farleft" height="50px" width="50px" >
+            <img src="img/logo.svg" alt="mainlogo" id="farleft" height="50px" width="50px" />
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="fas fa-search"></i></button>
 
@@ -112,110 +112,118 @@ foreach ($catnames as $catname)
 
                 <div class="main--greeting">
                     <h1>Hello </h1>
-                    <p>Welcome to your relief dashboard</p>
+                    <p>Welcome to your admin dashboard</p>
                 </div>
             </div>
-            <hr>
 
-<!--            ############Beginn Chart Budget############-->
-            <div class="chart row budgetchart">
-
-                <div class="firstChart  col-sm-4">
+            <!--            CHART DIV HERE-->
+            <div class="row chartrow">
+                <div class=" firstchart col-sm-4">
                     <canvas id="myChart"></canvas>
                 </div>
-                <div class="detailsforbudgetnotchart col-sm-8">
-                    <div class="  col-sm-4">
-                        <h4>Details:: </h4>
-                            <p>Total Budget:<?php echo $budgetCount ; ?> </p>
-                            <p> total category::<?php echo $Category ; ?></p>
-                            <p> total amount::<?php echo $amountCount ; ?></p>
-                    </div>
-
-
-                    <div class=" col-sm-4">
-                        <h3></h3>
-                            <p>Max Budget::<?php echo $budgetCount ; ?> </p>
-                            <p>Category::<?php echo $budgetCount ; ?> </p>
-                            <p>Max amount::<?php echo $budgetCount ; ?> </p>
-                        <p> Ration day::<?php echo "Calucalation pending."; ?></p>
-                        <!--                        calculation kora lagbe ration day er-->
-                    </div>
+                <div class="secondchart col-sm-4">
+                    <canvas id="myChart1"></canvas>
                 </div>
-
-
+                <div class="thirdchart col-sm-4">
+                    <canvas id="myChart2"></canvas>
+                </div>
             </div>
-<!--###########Chart end###################-->
+
+
             <hr>
             <p></p>
             <hr>
-<!--            ###############Adding budget form####################-->
-            <div class="formforbudget">
+            <!--            Form for expense start-->
+            <div class="formforbudget formexpense">
                 <div class="form-head">
+                    <p>hudai</p>
                     <?php
                     if (isset($_SESSION['success']))
                     {
                         echo('<p style="color: white;" > SUCESS:::'.htmlentities($_SESSION['success'])."</p>\n");
-                        unset($_SESSION['success']);
+
 
                     }
                     if (isset($_SESSION['error']))
                     {
                         echo('<p style="color: white;">ERROR::::'.htmlentities($_SESSION['error'])."</p>\n");
-                        unset($_SESSION['error']);
+
 
                     }
                     ?>
 
-                    <h3> Add Product and Budget</h3>
+                    <h3> Add category and Expense</h3>
 
                 </div>
-                <div class="form-content form-inline row">
+                <div class="form-content  row">
                     <form method="post">
-                        <div class="form-group ">
+                        <div class="form-group col-sm-4 ">
                             <label for="ID"> ID:</label>
-                            <input type="text" placeholder="Enter ID" name="id" required>
+                            <div class="input1">
+                                <input id="newinput" type="number" size="20px" placeholder="Enter ID" name="id" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="category"> Category id:</label>
+                            <div class="input2">
+                                <input type="number" size="20px" placeholder="Add Category id" name="catid" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="Budget"> Name</label>
+                            <div class="input3">
+                                <input type="text" size="20px" placeholder="Add Name" name="name" required>
+                            </div>
+
+                        </div>
+<!--                        <div class="form-group col-sm-4">-->
+<!--                            <label for="amount"> SellerID</label>-->
+<!--                            <div class="input4">-->
+<!--                                <input type="number" size="20px" placeholder="Seller-ID" name="sellerid" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="form-group col-sm-4">
+                            <label for="amount">Expense</label>
+                            <div class="input5">
+                                <input type="number" size="20px" placeholder="Add Cost" name="cost" required>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="category"> Category type:</label>
-                            <select name="catid">
-                                <option value="" disabled selected>Select</option>
-                                <?php echo $options; ?>
-                            </select>
+                        <div class="form-group col-sm-4">
+                            <label for="amount"> Expense Details</label>
+                            <div class="input1">
+                                <textarea type="text" size="20px" placeholder="Expense Details" name="expdetails" required> </textarea>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="Product Name"> Product Name:</label>
-                            <input type="text" placeholder="Add Name" name="product" required>
+                        <div class="form btn-group col-sm-4 btnexpense">
+                            <input type="submit" id="expenseSub"  name="add" value="ADD">
                         </div>
-                        <div class="form-group">
-                            <label for="Budget"> Budget:TAKA</label>
-                            <input type="text" placeholder="Add budget" name="budget" required>
-                        </div>
-                        <div class="form-group ">
-                            <label for="amount"> Amount:</label>
-                            <input type="text" placeholder="Amount-PACKAGE" name="amount" required>
+                        <div class="col-sm-4">
+
+
                         </div>
 
-                        <input id="budgetsub" type="submit" class="btn-danger" name="add" value="ADD">
                     </form>
                 </div>
             </div>
 
+            <!--            Form for expense end-->
 
-            <!--            ###############Adding budget form end here####################-->
-
+            <!--            Start form table-->
             <div class="table tablebudget" style="overflow-x:auto;">
 
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Budget</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Entered By</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Category Name</th>
+
+                        <th scope="col">Name</th>
+                        <th scope="col">SellerID</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Expense Details</th>
+                        <th scope="col"> Added By</th>
 
                     </tr>
                     </thead>
@@ -226,13 +234,18 @@ foreach ($catnames as $catname)
                         echo "<tr><td>";
                         echo (htmlentities($row['id']) );
                         echo " </td><td>";
-                        echo(htmlentities($row['catname']));
+                        echo(htmlentities($row['catid']));
                         echo " </td><td>";
-                        echo (htmlentities($row['budget']));
+                        echo (htmlentities($row['name']));
                         echo " </td><td>";
-                        echo (htmlentities($row['amount']));
+                        echo (htmlentities($row['sellerid']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['cost']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['remarks']));
                         echo " </td><td>";
                         echo (htmlentities($row['addid']));
+
                         echo " </td><td>";
 
                         echo'<a href="edit.php?user_id='.$row['id'].'">Edit</a>';
@@ -244,15 +257,8 @@ foreach ($catnames as $catname)
                     </tbody>
                 </table>
             </div>
-
-
-            <p> IS IT OK </p>
-
-
-
-
-
-
+            <!--            End form table-->
+        </div>
     </main>
 
     <div id="sidebar">
@@ -280,19 +286,16 @@ foreach ($catnames as $catname)
 
             <h2>View</h2>
             <a href="Budget.php">
-                <div class="sidebar--link active_menu_link">
+                <div class="sidebar--link ">
 
                     <i class="fa fa-user-secret" aria-hidden="true"></i>
                     Budget
                 </div>
             </a>
-
-            <a href="expenseBudget.php">
-                <div class="sidebar--link">
-                    <i class="fa fa-building-o"></i>
-                   Expense
-                </div>
-            </a>
+            <div class="sidebar--link active_menu_link">
+                <i class="fa fa-building-o"></i>
+                <a href="expenseBudget.php">Expense</a>
+            </div>
             <div class="sidebar--link">
                 <i class="fa fa-wrench"></i>
                 <a href="#">Category:: Expense</a>
@@ -344,10 +347,8 @@ foreach ($catnames as $catname)
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="js/script.js"></script>
 <script defer src="css/font/js/all.js"></script>
-<script src="boot/js/bootstrap.min.js"></script>\
+<script src="boot/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="js/reliefMainPagechart.js"></script>
-
 </body>
 </html>
-

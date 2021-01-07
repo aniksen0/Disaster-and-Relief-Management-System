@@ -8,22 +8,38 @@ CREATE TABLE budget(
     PRIMARY KEY (id)
 
 );
+#############CREAting EXpense Details###################
+CREATE TABLE expense(
+	id int(30) NOT NULL AUTO_INCREMENT UNIQUE,
+    catid int(30) NOT NULL,
+    name varchar(30) NOT NULL,
+    remarks varchar(30) NOT null,
+  	addid int(30),
+    cost int(30),
+    sellerid int(30),
+    PRIMARY KEY (id),
+    FOREIGN KEY (catid) REFERENCES categoryname(id),
+    FOREIGN KEY (sellerid) REFERENCES seller(id),
+  	FOREIGN KEY (addid) REFERENCES employee(id)
+);
 
 
 
 #############################################Creating ROLE and EMPLOYEE DETAILS#########################################
 
-CREATE TABLE role
+CREATE TABLE employee
 (
-    id int NOT NULL AUTO_INCREMENT UNIQUE,
+    id int(30) NOT NULL AUTO_INCREMENT UNIQUE,
 	name varchar(30) ,
     mobile varchar(30),
    	address varchar(30),
     emergency_contact_no varchar(30),
     email varchar(30),
-    role INT(20),
-    PRIMARY KEY(id)
+    role INT(30),
+    PRIMARY KEY(id),
+    FOREIGN KEY (role) REFERENCES role(id) ON DELETE SET null
 );
+
 ALTER TABLE table_name
   RENAME TO new_table_name;
 
@@ -35,4 +51,26 @@ CREATE TABLE role
     rolename varchar(20)
     
 );
+#############creating cat table###########################
+CREATE TABLE categoryname
+(
+    id int(30) NOT NULL AUTO_INCREMENT UNIQUE,
+	catname varchar(30) ,
+    
+    PRIMARY KEY(id)
+);
+
+######################SELLER INFO#####################
+CREATE TABLE seller
+(
+    id int(30) NOT null UNIQUE,
+    sellername varchar(30),
+    products varchar(30),
+    address varchar(30),
+    mobile varchar(30),
+    PRIMARY KEY(id)
+    
+);
+
+###################Creating table LOGIN#################
 
