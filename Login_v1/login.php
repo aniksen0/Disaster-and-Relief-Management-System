@@ -7,98 +7,167 @@ require_once "../connection.php";
 
 if ( isset($_POST['id']) && isset($_POST['pass'])  ) {
 
-    $salt='XyZzy12*_';
-    $pw= hash('md5',$salt.$_POST['pass']);
-    $check='1a52e17fa899cf40fb04cfc42e6352f1';
+    $salt = 'XyZzy12*_';
+    $pw = hash('md5', $salt . $_POST['pass']);
+    $check = 'ba71f8e7f3b18d6bcd642a90e641b85a';
     echo("<p>Handling POST data...</p>\n");
-    $sql = "SELECT name FROM users
-        WHERE id = :id AND pass = :pw";
+    $sql = "SELECT login.id,login.pass,employee.name,employee.imgdata,employee.role
+                from login join employee
+                WHERE login.id= :id and login.id=employee.id and login.pass=:pw;";
 
     echo "<p>$sql</p>\n";
-    $stmt=$pdo->prepare($sql);
+    $stmt = $conn->prepare($sql);
     $stmt->execute(array(
         ':id' => $_POST['id'],
-        ':pw' => $pw
+        ':pw'=>$pw
+
     ));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($_POST['id']==null || $_POST['pass']==null)
+    $count = $stmt->rowCount();
+    var_dump($row);
+    if ($count!=1)
     {
-        $_SESSION['error']="pass and password are required";
+        echo"wrong pass";
     }
-    else if($_POST['pass']=null){
-        $_SESSION['error']="Incorrect password";
+    else if ($count==1)
+    {
+        echo"ok enter";
+        $_SESSION['name']=$row['name'];
+        $name=$row['name'];
+        $_SESSION['role']=$row['role'];
+        $_SESSION['id']=$row['id'];
+//        echo $_SESSION['name'];
+//        echo $_SESSION['role'];
+//        echo is_bool($_SESSION['role']==4);
+        if ($row['pass']==$check)
+        {
+            header("Location:../passreset.php");
+            return;
+        }
+        else
+        {
+            if ($_SESSION['role']== 4)
+            {
+                header("Location: ../admin.php");
+                echo "how are you";
+                return;
 
-    }
-    else if (!preg_match("/@/i", $_POST['id'])) {
-        $_SESSION['error']= "id must have an at-sign (@)";
+            }
+            if ($_SESSION['role']<3)
+            {
+                header("Location: ../reliefMainPage.php");
+                return;
+            }
+        }
 
     }
     else
     {
-        if ( $row!=true ) {
-            echo "<h1>Login incorrect.</h1>\n";
-            $_SESSION['error']="Incorrect Password";
-
-            error_log("Login fail ".$_POST['id']." $pw");
-
-            //echo $pw."\n";
-            //echo $check;
-        }
-        else {
-            $_SESSION['name'] = $_POST['id'];
-            $_SESSION['success']="Log In success";
-            header("Location: view.php");
-            error_log("Login success ".$_POST['id']);
-            return;
-
-
-        }
+        echo "something wrong contact administrator";
     }
 
-
-}
-else
-{
-    echo"id and password are required";
 }
 
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>
-        Anik Sen
-    </title>
+    <title>Login V1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
 </head>
 <body>
-<p>Please Log In</p>
-<?php
-if ( isset($_SESSION['error']) ) {
-    echo('<p style="color: red;">'.($_SESSION['error'])."</p>\n");
-    echo $_SESSION["error"];
-    unset($_SESSION['error']);
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="images/img-01.png" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form" method="POST">
+					<span class="login100-form-title">
+						Support Login
+					</span>
+
+                <div class="wrap-input100 validate-input" data-validate = "Valid ID is required">
+                    <input class="input100" type="text" name="id" placeholder="ID">
+                    <span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-id-badge"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                    <input class="input100" type="password" name="pass" placeholder="Password">
+                    <span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Login
+                    </button>
+                </div>
+
+                <div class="text-center p-t-12">
+						<span class="txt1">
+							Problem? Contact your administrator.
+						</span>
+
+                </div>
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="#">
 
 
-}
-else if (isset($_SESSION['success'])){
-    echo('<p style="color: green;">'.($_SESSION['success'])."</p>\n");
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    unset($_SESSION['success']);
-}
-?>
-<form method="post">
-    <p>id:
-        <input type="text" name="id"></p>
-    <p>Password:
-        <input type="password"  name="pass"></p>
-    <p><input type="submit" value="Log In"/>
-        <a href="<?php echo($_SERVER['PHP_SELF']);?>">Refresh</a></p>
-</form>
-<p>
-    Check out this
-    <a href="http://xkcd.com/327/" target="_blank">XKCD comic that is relevant</a>.
+<footer class="footer">
+    &copy; Copyright Ministry of Disaster Management and Relief
+</footer
+
+
+    <!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/tilt/tilt.jquery.min.js"></script>
+<script >
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
 
 </body>
 </html>
