@@ -69,13 +69,13 @@ if (isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['mobile'])&&isset($
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="#">Authorization</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">System Check</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="registration.php">Add employee</a>
                 </li>
                 <li class="nav-item">

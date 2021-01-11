@@ -71,6 +71,17 @@ CREATE TABLE seller
     PRIMARY KEY(id)
     
 );
+######PEOPLE DATA###############
+CREATE TABLE Peopledata(
+    srn INT(30) AUTO_INCREMENT,
+ 	division varchar(30),
+    district varchar(30),
+    upazilla varchar(30),
+    male int(30),
+    female int(30),
+    children int(30),
+    PRIMARY KEY(srn)
+);
 
 ###################Creating table LOGIN#################
 

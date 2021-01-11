@@ -78,7 +78,7 @@
 }
 .detailsforbudgetnotchart
 {
-    background-color: #8fd19e;
+    background-color: #ed969e;
     color:#23272b;
     float: left;
 
@@ -238,4 +238,8 @@ display: inline-block;
     background-color: #6c757d !important;
     display: block !important;
     border-bottom:1px solid #000 !important;
+}
+#catsub
+{
+    margin-top: 8px;
 }
