@@ -311,7 +311,7 @@
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-wrench"></i>
-                <a href="#">Category:: Expense</a>
+                <a href="category.php">Category:</a>
             </div>
             <div class="sidebar--link active">
                 <i class="fa fa-archive"></i>
@@ -349,7 +349,7 @@
             </div>
             <div class="sidebar--logout">
                 <i class="fa fa-power-off"></i>
-                <a href="#">Log out</a>
+                <a href="logout.php">Log out</a>
             </div>
         </div>
     </div>

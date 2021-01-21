@@ -295,7 +295,7 @@ foreach ($catnames as $catname)
             </a>
             <div class="sidebar--link">
                 <i class="fa fa-wrench"></i>
-                <a href="#">Category:: Expense</a>
+                <a href="category.php">Category:</a>
             </div>
             <div class="sidebar--link active">
                 <i class="fa fa-archive"></i>

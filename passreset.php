@@ -20,7 +20,7 @@ require_once "connection.php";
         if ($_POST['first']==$_POST['second'])
         {
             $salt = 'XyZzy12*_';
-            $pw = hash('md5', $salt . $_POST['pass']);
+            $pw = hash('md5', $salt . $_POST['first']);
             $sql="UPDATE login set pass=:pass WHERE id=:id";
             $data=$conn->prepare($sql);
             $data->execute(array(
@@ -29,6 +29,8 @@ require_once "connection.php";
 
             ));
             $_SESSION['success']="Record Updated";
+
+
             if ($_SESSION['role']== 4)
             {
                 header("Location: admin.php");
@@ -36,27 +38,35 @@ require_once "connection.php";
                 return;
 
             }
-            if ($_SESSION['role']<3)
+            else if ($_SESSION['role']<=3)
             {
                 header("Location: reliefMainPage.php");
                 return;
             }
+            else
+            {
+                echo "there is problem";
+            }
+
 
         }
+
 
 
         else
         {
-            echo "something wrong. contact administrator";
+            $_SESSION["error"]="problem";
         }
     }
 
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login V1</title>
+    <title>Password Reset
+    </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/font/css/all.css" rel="stylesheet">
@@ -66,7 +76,7 @@ require_once "connection.php";
     <link href="css/mainStyle.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <!--    <link rel="stylesheet" href="css/mainStyle.css">-->
     <link rel="stylesheet" href="boot/css/bootstrap.min.css">
-
+</head>
 <body class="bg-light">
 <header class="jumbotron">
     <div class="container">
@@ -88,6 +98,20 @@ require_once "connection.php";
         <p class="">Please change your <strong style="color:indianred"> one time password </strong> before Login.</p>
         <p style="background-color: indianred; font-weight: bold">Parameter:Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters</p>
     </div>
+    <?php
+    if (isset($_SESSION['success']))
+    {
+        echo('<p style="color: white;" > SUCESS:::'.htmlentities($_SESSION['success'])."</p>\n");
+        unset($_SESSION['success']);
+
+    }
+    if (isset($_SESSION['error']))
+    {
+        echo('<p style="color: white;">ERROR::::'.htmlentities($_SESSION['error'])."</p>\n");
+        unset($_SESSION['error']);
+
+    }
+    ?>
     <div class="form col-12 col-sm-4 justify-content-center">
       <form class="col-auto" method="post">
           <div class="form-group row ">

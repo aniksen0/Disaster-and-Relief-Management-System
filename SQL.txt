@@ -82,6 +82,14 @@ CREATE TABLE Peopledata(
     children int(30),
     PRIMARY KEY(srn)
 );
+########sysLOG##########
+CREATE TABLE syslog(
+	number int(30),
+    Action Varchar(50),
+    time TIMESTAMP(5),
+    id int(30),
+    FOREIGN KEY (id) REFERENCES employee(id) ON DELETE NO ACTION
+);
 
 ###################Creating table LOGIN#################
 

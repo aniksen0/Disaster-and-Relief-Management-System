@@ -1,0 +1,42 @@
+  ####from login##########
+    if ($_POST['id']==null || $_POST['pass']==null)
+    {
+        $_SESSION['error']="pass and password are required";
+    }
+    else if($_POST['pass']=null){
+        $_SESSION['error']="Incorrect password";
+
+    }
+//    else if (!preg_match("/@/i", $_POST['id'])) {
+//        $_SESSION['error']= "id must have an at-sign (@)";
+//
+//    }
+    else
+    {
+        if ( $row!=true ) {
+            echo "<h1>Login incorrect.</h1>\n";
+            $_SESSION['error']="Incorrect Password";
+            error_log("Login fail ".$_POST['id']." $pw");
+
+            //echo $pw."\n";
+            //echo $check;
+        }
+        else {
+            $_SESSION['name'] = $_POST['id'];
+            $_SESSION['success']="Log In success";
+            header("Location: view.php");
+            error_log("Login success ".$_POST['id']);
+            return;
+
+
+        }
+    }
+
+
+}
+else
+{
+    echo"id and password are required";
+}
+
+#######login end#########

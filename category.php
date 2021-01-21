@@ -10,7 +10,7 @@ session_start();
 require "connection.php";
 if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 {
-    header("Location:Login_v1/login.php");
+    header("Location:index.php");
     return;
 }
 else
@@ -249,7 +249,7 @@ $rows = $data->fetchALL(PDO::FETCH_ASSOC);
             </a>
             <div class="sidebar--link active_menu_link">
                 <i class="fa fa-wrench"></i>
-                <a href="category.php">Product Category</a>
+                <a href="category.php">Category</a>
             </div>
             <div class="sidebar--link active">
                 <i class="fa fa-archive"></i>

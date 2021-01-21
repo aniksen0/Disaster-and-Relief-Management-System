@@ -7,4 +7,4 @@
  */
 session_start();
 session_destroy();
-header("Location:Login_v1/login.php");
+header("Location:index.php");
