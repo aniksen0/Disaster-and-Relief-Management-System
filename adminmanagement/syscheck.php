@@ -6,15 +6,29 @@
  * Time: 1:16 PM
  *
  */
+function db()
+{
+    if( require_once "../connection.php") {
+
+    }else
+    {
+        throw new Exception ("Database Refused");
+    }
+}
 
 session_start();
-require_once "../connection.php";
 
-if (fsockopen('www.google.com', 80)){
-    $severcheck= 'The server in online';
-} else{
-    $severcheck='The server in offline';
+
+function server($value,$port)
+{
+    if (fsockopen($value,$port)){
+        return true;
+    } else{
+        throw  new  Exception('The server in offline');
+    }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +76,7 @@ if (fsockopen('www.google.com', 80)){
                         <p>Add Employee</p>
                     </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="tables.php">
                         <i class="material-icons">content_paste</i>
                         <p>Employee List</p>
@@ -74,7 +88,7 @@ if (fsockopen('www.google.com', 80)){
                     <p>System Log</p>
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item active">
                     <a class="nav-link" href="syscheck.php">
                         <i class="material-icons">bubble_chart</i>
                         <p>System Check</p>
@@ -173,8 +187,35 @@ if (fsockopen('www.google.com', 80)){
                             </div>
                             <div class="card-body">
                                 <div class="">
-                                    <p> Internet Connection: <span id="internet"> </span></p>
-                                    <p> Server Connection: <span id="internet"><?php echo $severcheck?> </span></p>
+                                    <ul>
+                                        <li> Internet Connection: <span id="internet"> </span></li>
+                                        <li> Server Connection: <span id="internet"><?php
+                                                sleep(3);
+                                                try
+                                                {
+                                                    server('www.google.com',80);
+                                                    echo "The server is ONLINE";
+                                                }
+                                                catch(Exception $e)
+                                                {
+                                                    echo 'Server said:'.$e->getMessage();
+                                                }?> </span>
+                                        </li>
+                                        <li>
+                                            Database connection: <?php
+                                            sleep(3);
+
+                                            try
+                                            {
+                                                db();
+                                                echo "Database system nominal";
+                                            }
+                                            catch(Exception $e)
+                                            {
+                                                echo $e->getMessage();
+                                            }
+                                            ?>
+                                        </li>
 
                                     </ul>
                                 </div>
@@ -182,8 +223,8 @@ if (fsockopen('www.google.com', 80)){
                         </div>
                     </div>
 
-                    <footer id="footer">
-                        <p>&copyright All rights reserved</p>
+                    <footer  id="footer">
+                        <p class="align-items-center">&copyright All rights reserved</p>
                     </footer>
                 </div>
             </div>

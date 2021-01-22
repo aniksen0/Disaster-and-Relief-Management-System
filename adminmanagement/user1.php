@@ -3,7 +3,7 @@ require "../connection.php";
 session_start();
 if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 {
-    header("Location: ../Login_v1/login.php");
+    header("Location: ../index.php");
     return;
 }
 if ($_SESSION['role']!=4)
@@ -13,7 +13,7 @@ if ($_SESSION['role']!=4)
 }
 if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 {
-    header("Location: Login_v1/login.php");
+    header("Location: ../index.php");
     return;
 }
 

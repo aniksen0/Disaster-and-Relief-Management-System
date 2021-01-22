@@ -90,6 +90,22 @@ CREATE TABLE syslog(
     id int(30),
     FOREIGN KEY (id) REFERENCES employee(id) ON DELETE NO ACTION
 );
+###################Create online1 table#########################
+CREATE TABLE online1(
+	number INT(30),
+    id int(30),
+    status varchar(30),
+    FOREIGN KEY(id) REFERENCES employee(id) on delete no action
+    
+);
+
+############Creating acessdenied###################
+CREATE TABLE accessdenied(
+	sn int(30) AUTO_INCREMENT,
+    log varchar(30),
+    ip varchar(30),
+    PRIMARY KEY(sn)
+);
 
 ###################Creating table LOGIN#################
 

@@ -1,6 +1,19 @@
 <?php
 session_start();
 
+if (isset($_SESSION['role']))
+{
+    if ($_SESSION['role']==4)
+    {
+        header("Location:adminmanagement/dashboard.php");
+        return;
+    }
+    else if (($_SESSION['role']==3)&&$_SESSION['role']==2&&$_SESSION['role']==1)
+    {
+        header("Location:reliefMainPage.php");
+        return;
+    }
+}
 require "connection.php";
 
 // p' OR '1' = '1
@@ -29,35 +42,45 @@ if ( isset($_POST['id']) && isset($_POST['pass'])  ) {
     $_SESSION['img']=$row['imgdata'];
     $_SESSION['name']=$row['name'];
     $_SESSION['id']=$row['id'];
+
     if ($count!=1)
     {
         echo "wrong pass";
     }
     else if ($count==1)
     {
+        $active="active";
+        $onlinenaki="INSERT INTO online1 (id,status) VALUES (:id, :status) ";
+        $onlinedata=$conn->prepare($onlinenaki);
+        $onlineinput=$onlinedata->execute(array(
+            ':id' => htmlentities($row['id']),
+            ':status'=>htmlentities($active)
+        ));
+
         if ($row['pass']==$check)
         {
             header("Location:passreset.php");
             return;
+        }
+        if (($row['pass']!=$check)&&($count==1))
+        {
+            if ($_SESSION['role']==4)
+            {
+                header("Location:adminmanagement/dashboard.php");
+                return;
+            }
+            if ($_SESSION['role']<=3)
+            {
+                header("Location:reliefMainPage.php");
+                return;
+            }
         }
     }
 
 
 
     
-    if (($row['pass']!=$check)&&($count==1))
-    {
-        if ($_SESSION['role']==4)
-        {
-            header("Location:adminmanagement/dashboard.php");
-            return;
-        }
-        if ($_SESSION['role']<=3)
-        {
-            header("Location:reliefMainPage.php");
-            return;
-        }
-    }
+
 }
 
 

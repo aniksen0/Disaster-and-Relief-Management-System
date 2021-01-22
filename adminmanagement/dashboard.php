@@ -31,6 +31,10 @@ $emp="SELECT * from employee";
 $data = $conn->query($emp);
 $number=$data->rowCount();
 
+$statusquery="SELECT online1.id, online1.status, employee.name from online1 JOIN employee where online1.id=employee.id";
+$store1=$conn->query($statusquery);
+$rows=$store1->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 <!DOCTYPE html>
@@ -487,7 +491,7 @@ $number=$data->rowCount();
                                                         </label>
                                                     </div>
                                                 </td>
-                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                                <td class="bg-danger" style="color: #black;">All System Nominal</td>
                                                 <td class="td-actions text-right">
                                                     <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
                                                         <i class="material-icons">edit</i>
@@ -551,41 +555,29 @@ $number=$data->rowCount();
                         <div class="card">
                             <div class="card-header card-header-warning">
                                 <h4 class="card-title">Employees Stats</h4>
-                                <p class="card-category">New employees on 15th September, 2016</p>
+                                <p class="card-category">Employee activity.</p>
                             </div>
                             <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead class="text-warning">
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Country</th>
+                                    <th>Status</th>
+
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Minerva Hooper</td>
-                                        <td>$23,789</td>
-                                        <td>Curaçao</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Sage Rodriguez</td>
-                                        <td>$56,142</td>
-                                        <td>Netherlands</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Philip Chaney</td>
-                                        <td>$38,735</td>
-                                        <td>Korea, South</td>
-                                    </tr>
+                                    <?php
+                                    foreach($rows as $row)
+                                    {
+                                        echo "<tr><td>";
+                                        echo (htmlentities($row['id']) );
+                                        echo " </td><td>";
+                                        echo(htmlentities($row['name']));
+                                        echo " </td><td>";
+                                        echo(htmlentities($row['status']));
+                                        echo "</td></tr>";
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
