@@ -117,90 +117,90 @@ $rows = $data->fetchALL(PDO::FETCH_ASSOC);
             </div>
             <hr>
 
+        </div>
+
+        <!--            ###############Adding people form####################-->
+        <div class="formforbudget container justify-content-center align-content-center">
+            <div class="form-head">
+                <?php
+                if (isset($_SESSION['success']))
+                {
+                    echo('<p style="color: white;" > SUCESS:::'.htmlentities($_SESSION['success'])."</p>\n");
+                    unset($_SESSION['success']);
+
+                }
+                if (isset($_SESSION['error']))
+                {
+                    echo('<p style="color: white;">ERROR::::'.htmlentities($_SESSION['error'])."</p>\n");
+                    unset($_SESSION['error']);
+
+                }
+                ?>
+
+                <h3> Add Category Data</h3>
             </div>
-
-            <!--            ###############Adding people form####################-->
-            <div class="formforbudget container justify-content-center align-content-center">
-                <div class="form-head">
-                    <?php
-                    if (isset($_SESSION['success']))
-                    {
-                        echo('<p style="color: white;" > SUCESS:::'.htmlentities($_SESSION['success'])."</p>\n");
-                        unset($_SESSION['success']);
-
-                    }
-                    if (isset($_SESSION['error']))
-                    {
-                        echo('<p style="color: white;">ERROR::::'.htmlentities($_SESSION['error'])."</p>\n");
-                        unset($_SESSION['error']);
-
-                    }
-                    ?>
-
-                    <h3> Add Category Data</h3>
-                </div>
-                <div class="form-content form-inline row">
-                    <form method="post">
+            <div class="form-content form-inline row">
+                <form method="post">
 
 
-                        <div class="form-group">
-                            <label for="id">ID:</label>
-                            <input type="text" id="id" required placeholder="Start at 100" name="id">
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category Name</label>
-                            <input type="text" id="category" required placeholder=" Enter Category" name="category">
-                        </div>
+                    <div class="form-group">
+                        <label for="id">ID:</label>
+                        <input type="text" id="id" required placeholder="Start at 100" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category Name</label>
+                        <input type="text" id="category" required placeholder=" Enter Category" name="category">
+                    </div>
 
-                        <!--                            <div class="form-group">-->
-                        <!--                                <label for="Population">Number</label>-->
-                        <!--                                <input type="text" required placeholder="Number" name="population">-->
-                        <!--                            </div>-->
+                    <!--                            <div class="form-group">-->
+                    <!--                                <label for="Population">Number</label>-->
+                    <!--                                <input type="text" required placeholder="Number" name="population">-->
+                    <!--                            </div>-->
 
-                        <input id="catsub" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="add" value="ADD">
-                    </form>
-                </div>
-
-
+                    <input id="catsub" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="add" value="ADD">
+                </form>
             </div>
 
 
-            <!--            ###############Adding people form end here####################-->
-
-            <div class="table tablebudget" style="overflow-x:auto;">
-
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Category Name</th>
-                        <th scope="col">Action</th>
+        </div>
 
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    foreach($rows as $row)
-                    {
-                        echo "<tr><td>";
-                        echo (htmlentities($row['id']) );
-                        echo " </td><td>";
-                        echo(htmlentities($row['catname']));
-                        echo " </td><td>";
+        <!--            ###############Adding people form end here####################-->
 
-                        echo'<a href="edit.php?id='.$row['id'].'">Edit</a>';
-                        echo"/";
-                        echo'<a href="delete.php?id='.$row['id'].'">Delete</a>';
-                        echo "</td></tr>";
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
+        <div class="table tablebudget" style="overflow-x:auto;">
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Action</th>
 
 
-            <p> IS IT OK </p>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach($rows as $row)
+                {
+                    echo "<tr><td>";
+                    echo (htmlentities($row['id']) );
+                    echo " </td><td>";
+                    echo(htmlentities($row['catname']));
+                    echo " </td><td>";
+
+                    echo'<a href="edit.php?id='.$row['id'].'">Edit</a>';
+                    echo"/";
+                    echo'<a href="delete.php?id='.$row['id'].'">Delete</a>';
+                    echo "</td></tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+
+        <p> IS IT OK </p>
 
 
 

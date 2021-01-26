@@ -21,7 +21,7 @@ if (isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['mobile'])&&isset($
 {
     if (is_numeric($_POST['mobile'])&&is_numeric($_POST['ec'])&&is_numeric($_POST['role']))
     {
-        $folder= "../img/";
+        $folder= "img/";
         $filename= $_FILES["file1"]["name"];
         $tempname= $_FILES["file1"]["tmp_name"];
         $filenamenew=$folder.$filename;

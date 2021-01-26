@@ -107,5 +107,20 @@ CREATE TABLE accessdenied(
     PRIMARY KEY(sn)
 );
 
+################create table census data######################
+CREATE TABLE census(
+	number  int(30) AUTO_INCREMENT not null,
+    Name varchar(30),
+    distname varchar(30),
+    Density int(30),
+   	datafirst int(30),
+    datasecond int(30),
+    dathathird int(30),
+    projection int(30),
+    projectionMale int(30),
+    projectionFemale int(30),
+    projectionChild int(30),
+    PRIMARY KEY(number)
+);
 ###################Creating table LOGIN#################
 

@@ -5,6 +5,14 @@
  * Date: 11/27/2020
  * Time: 1:59 PM
  */
+session_start();
+require_once "connection.php";
+if (!$_SESSION['id']&&!$_SESSION['role'])
+{
+    header("Location:index.php");
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +50,7 @@
                 <i class="fas fa-clock-o" aria-hidden="true"></i>
             </a>
             <a href="#">
-                <img width="30" src="img/avatar.png" alt="LoginPerson's img" />
+                <img width="30" src="<?php echo  $_SESSION['img'];?>" alt="LoginPerson's img" />
                 <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
             </a>
         </div>
@@ -297,39 +305,44 @@
         </div>
         <p>Relief Section</p>
         <div class="sidebar--menu">
-            <div class="sidebar--link active_menu_link">
-                <i class="fa fa-home"></i>
-                <a href="#">Overview</a>
-            </div>
+            <a href="reliefMainPage.php">
+                <div class="sidebar--link active_menu_link">
+                    <i class="fa fa-home"></i>
+                    Overview
+                </div>
+            </a>
+
             <h2>View</h2>
-            <div class="sidebar--link">
-                <i class="fa fa-user-secret" aria-hidden="true"></i>
-                <a href="Budget.php">Budget</a>
-            </div>
-            <div class="sidebar--link">
-                <i class="fa fa-building-o"></i>
-                <a href="#">Expense</a>
-            </div>
-            <div class="sidebar--link">
+            <a href="Budget.php">
+                <div class="sidebar--link ">
+
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                    Budget
+                </div>
+            </a>
+
+            <a href="expenseBudget.php">
+                <div class="sidebar--link">
+                    <i class="fa fa-building-o"></i>
+                    Expense
+                </div>
+            </a>
+            <div class="sidebar--link ">
                 <i class="fa fa-wrench"></i>
-                <a href="category.php">Category:</a>
+                <a href="category.php">Category</a>
             </div>
             <div class="sidebar--link active">
                 <i class="fa fa-archive"></i>
-                <a href="#">Total Distribution</a>
+                <a href="totalDistribution.php">Total Distribution</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-handshake-o"></i>
-                <a href="#">Lackings</a>
+                <a href="lackings.php">Lackings</a>
             </div>
             <h2>Update</h2>
             <div class="sidebar--link">
-                <i class="fa fa-question"></i>
-                <a href="#">Update Budget & Expense</a>
-            </div>
-            <div class="sidebar--link">
                 <i class="fa fa-sign-out"></i>
-                <a href="#">Update Distribution list</a>
+                <a href="addDistributionData.php">Add Distribution data</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-calendar-check-o"></i>
@@ -337,16 +350,16 @@
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-files-o"></i>
-                <a href="#">Coming soon</a>
+                <a href="rationCalculator.php">Ration Calculator</a>
             </div>
             <h2>Disaster View</h2>
             <div class="sidebar--link">
                 <i class="fa fa-money"></i>
-                <a href="#">Affected area</a>
+                <a href="affectedareaview.php">Affected area</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-briefcase"></i>
-                <a href="#"> Affected Structure</a>
+                <a href="affectedStructure.php"> Affected Structure</a>
             </div>
             <div class="sidebar--logout">
                 <i class="fa fa-power-off"></i>

@@ -18,8 +18,8 @@ if ($_SESSION['role']!=4)
     header("Location: ../AcessDenied.php");
     return;
 }
-echo $_SESSION['name'];
-echo $_SESSION['role'];
+//echo $_SESSION['name'];
+//echo $_SESSION['role'];
 $_SESSION['active']="active";
 
 
@@ -35,6 +35,10 @@ $statusquery="SELECT online1.id, online1.status, employee.name from online1 JOIN
 $store1=$conn->query($statusquery);
 $rows=$store1->fetchAll(PDO::FETCH_ASSOC);
 
+$action="SELECT * from syslog";
+$data2 = $conn->query($action);
+$time=$data2->fetch(PDO::FETCH_ASSOC);
+$number2=$data2->rowCount();
 
 ?>
 <!DOCTYPE html>
@@ -200,7 +204,17 @@ $rows=$store1->fetchAll(PDO::FETCH_ASSOC);
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons text-info">warning</i>
-                                    <a href="javascript:;">Disk ok</a>
+                                    <a href="javascript:;">
+                                        <?php if($store['MB']<100000)
+                                        {
+                                            echo"Disk limit optimum";
+                                        }
+                                        else
+                                        {
+                                        echo "Disk limit will exceed soon";
+                                        }
+                                        ?>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -241,14 +255,14 @@ $rows=$store1->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card card-stats">
                             <div class="card-header card-header-info card-header-icon">
                                 <div class="card-icon">
-                                    <i class="fa fa-twitter"></i>
+                                    <i class="fa fa-circle-thin"></i>
                                 </div>
                                 <p class="card-category">Total action</p>
-                                <h3 class="card-title">calculation here</h3>
+                                <h3 class="card-title"><?php echo $number2?></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">update</i> Just Updated
+                                    <i class="material-icons">update</i> <?php echo $time['time']; ?>
                                 </div>
                             </div>
                         </div>
@@ -601,7 +615,7 @@ $rows=$store1->fetchAll(PDO::FETCH_ASSOC);
 
                 </div>
                 <div class="card" style="width:200px;">
-                    <img class="card-img-top img-fluid" src="<?php echo  $_SESSION['img'];?>" alt="<?php echo  $_SESSION['img'];?>">
+                    <img class="card-img-top img-fluid align-items-center" src="../<?php echo  $_SESSION['img'];?>" alt="<?php echo  $_SESSION['img'];?>">
                     <div class="card-body">
                         <h5 class="card-title text-center"><bold><?php echo $_SESSION['name']?> </bold></h5>
                     </div>

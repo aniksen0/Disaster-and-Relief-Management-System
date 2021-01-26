@@ -136,7 +136,6 @@ $rows = $data2->fetchALL(PDO::FETCH_ASSOC);
             <!--            Form for expense start-->
             <div class="formforbudget formexpense">
                 <div class="form-head">
-                    <p>hudai</p>
                     <?php
                     if (isset($_SESSION['success']))
                     {
