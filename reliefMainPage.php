@@ -9,9 +9,26 @@ session_start();
 require_once "connection.php";
 if (!$_SESSION['id']&&!$_SESSION['role'])
 {
-    header("Location:index.php");
+    header("Location:AcessDenied.php");
 }
+$sql = "SELECT * FROM affectedpeople";
+$stmt = $conn->query($sql);
 
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+$sql2 = "SELECT * FROM affectedpeople WHERE status='done'";
+$stmt1 = $conn->query($sql2);
+
+$rows2= $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+$sql3 = "SELECT * FROM categoryname";
+$stmt2 =$conn->query($sql3);
+$rows3= $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+$sql4 = "SELECT * FROM disaster";
+$stmt4 =$conn->query($sql4);
+$disastera= $stmt4->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -20,15 +37,19 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/font/css/all.min.css"crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font/css/all.min.css" crossorigin="anonymous">
 
-    <link rel="stylesheeet" href="boot/css/bootstrap.min.css">
+    <link href="css/font/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link href="css/mainStyle.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <!--    <link rel="stylesheet" href="css/mainStyle.css">-->
+    <link href="boot/css/bootstrap.min.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/mainSidebar.css" >
     <link rel="stylesheet" href="css/mainStyle.css" >
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
     <title>Relief Dashboard</title>
@@ -67,7 +88,11 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
                     <p>Welcome to your relief dashboard</p>
                 </div>
             </div>
-                <h3 id="disHeadline"> Current disaster:: <?php echo"None" ?></h3>
+                <h3 class="alert alert-danger col-12 text-center"> Current disaster:: <?php foreach ($disastera as $disaster)
+                    {
+                        echo $disaster['disasterName'];
+                    }?>
+                </h3>
             <!-- MAIN CARDS STARTS HERE -->
             <div class="main--cards">
                 <div class="card">
@@ -138,43 +163,29 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Adress</th>
-                            <th scope="col">Affected by </th>
+                            <th scope="col">Division</th>
+                            <th scope="col">District</th>
+                            <th scope="col">Thana</th>
+                            <th scope="col">householding</th>
+                            <th scope="col">Contact_no </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>male</td>
-                            <td>@mdo</td>
-                            <td>Adress goes here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>female</td>
-                            <td>@fat</td>
-                            <td>Adress goes here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td >Larry the Bird</td>
-                            <td >Male</td>
-                            <td>@twitter</td>
-                            <td>Adress goes here</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td >Larry the Bird</td>
-                            <td >Male</td>
-                            <td>@twitter</td>
-                            <td>Adress goes here</td>
-                        </tr>
-                        </tbody>
+                        <?php foreach($rows as $row)
+                        {
+                            echo "<tr><td>";
+                            echo(htmlentities($row['division']));
+                            echo " </td><td>";
+                            echo (htmlentities($row['district']));
+                            echo " </td><td>";
+                            echo (htmlentities($row['thana']));
+                            echo " </td><td>";
+                            echo (htmlentities($row['householding']));;
+                            echo " </td><td>";
+                            echo (htmlentities($row['contact_no']));
+                            echo " </td><td>";
+                        }
+                        ?>
                     </table>
             </div>
             <hr>
@@ -189,43 +200,34 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
+
+                        <th scope="col">Division</th>
+                        <th scope="col">District</th>
+                        <th scope="col">Thana</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Adress</th>
-                        <th scope="col">Affected by </th>
-                        <th scope="col">Status</th>
+                        <th scope="col">householding</th>
+                        <th scope="col">Contact_no </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>male</td>
-                        <td>@mdo</td>
-                        <td>Adress goes here</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>female</td>
-                        <td>@fat</td>
-                        <td>Adress goes here</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td >Larry the Bird</td>
-                        <td >Male</td>
-                        <td>@twitter</td>
-                        <td>Adress goes here</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td >Larry the Bird</td>
-                        <td >Male</td>
-                        <td>@twitter</td>
-                        <td>Adress goes here</td>
-                    </tr>
+                    <?php foreach($rows2 as $row)
+                    {
+                        echo "<tr><td>";
+                        echo(htmlentities($row['division']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['district']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['thana']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['name']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['householding']));;
+                        echo " </td><td>";
+                        echo (htmlentities($row['contact_no']));
+            
+                        echo "</td></tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -243,44 +245,18 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Product type</th>
-                        <th scope="col">Needed</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">distributed</th>
-                        <th scope="col">Lackings</th>
-
-                        <th scope="col">Status</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>male</td>
-                        <td>@mdo</td>
-                        <td>Adress goes here</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>female</td>
-                        <td>@fat</td>
-                        <td>Adress goes here</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td >Larry the Bird</td>
-                        <td >Male</td>
-                        <td>@twitter</td>
-                        <td>Adress goes here</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td >Larry the Bird</td>
-                        <td >Male</td>
-                        <td>@twitter</td>
-                        <td>Adress goes here</td>
-                    </tr>
+                    <?php foreach($rows3 as $row)
+                    {
+                        echo "<tr><td>";
+                        echo(htmlentities($row['id']));
+                        echo " </td><td>";
+                        echo (htmlentities($row['catname']));
+                        echo " </td><td>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -306,13 +282,20 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
         <p>Relief Section</p>
         <div class="sidebar--menu">
             <a href="reliefMainPage.php">
-                <div class="sidebar--link active_menu_link">
+                <div class="sidebar--link active_menu_link ">
                     <i class="fa fa-home"></i>
                     Overview
                 </div>
             </a>
 
             <h2>View</h2>
+            <a href="currentdisastersituation.php">
+                <div class="sidebar--link  ">
+
+                    <i class="fas fa-house-damage"></i>
+                    Current Disaster
+                </div>
+            </a>
             <a href="Budget.php">
                 <div class="sidebar--link ">
 
@@ -323,7 +306,7 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
 
             <a href="expenseBudget.php">
                 <div class="sidebar--link">
-                    <i class="fa fa-building-o"></i>
+                    <i class="fas fa-money-check-alt"></i>
                     Expense
                 </div>
             </a>
@@ -331,30 +314,30 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
                 <i class="fa fa-wrench"></i>
                 <a href="category.php">Category</a>
             </div>
-            <div class="sidebar--link active">
+            <div class="sidebar--link ">
                 <i class="fa fa-archive"></i>
                 <a href="totalDistribution.php">Total Distribution</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-handshake-o"></i>
-                <a href="lackings.php">Lackings</a>
+                <i class="fa fa-list"></i>
+                <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
             <div class="sidebar--link">
-                <i class="fa fa-sign-out"></i>
+                <i class="fas fa-pen"></i>
                 <a href="addDistributionData.php">Add Distribution data</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-calendar-check-o"></i>
-                <a href="#">Lackings</a>
+                <i class="fas fa-pen"></i>
+                <a href="addaffectedpeople.php">Add Affected People</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-files-o"></i>
+                <i class="fas fa-calculator"></i>
                 <a href="rationCalculator.php">Ration Calculator</a>
             </div>
             <h2>Disaster View</h2>
             <div class="sidebar--link">
-                <i class="fa fa-money"></i>
+                <i class="fas fa-chart-area"></i>
                 <a href="affectedareaview.php">Affected area</a>
             </div>
             <div class="sidebar--link">

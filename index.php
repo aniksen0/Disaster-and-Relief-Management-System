@@ -45,7 +45,7 @@ if ( isset($_POST['id']) && isset($_POST['pass'])  ) {
 
     if ($count!=1)
     {
-        echo "wrong pass";
+        $_SESSION['error']= "ID OR PASS DIDN'T MATCH";
     }
     else if ($count==1)
     {
@@ -112,6 +112,7 @@ if ( isset($_POST['id']) && isset($_POST['pass'])  ) {
 
 <div class="limiter">
     <div class="container-login100">
+
         <div class="wrap-login100">
             <div class="login100-pic js-tilt" data-tilt>
                 <img src="Login_v1/images/img-01.png" alt="IMG">
@@ -121,6 +122,14 @@ if ( isset($_POST['id']) && isset($_POST['pass'])  ) {
 					<span class="login100-form-title">
 						Support Login
 					</span>
+                  <span class="alert-danger col-12">
+                <?php if (isset($_SESSION['error']))
+                {
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                }
+                ?>
+            </span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid ID is required">
                     <input class="input100" type="text" name="id" placeholder="ID">

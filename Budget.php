@@ -62,6 +62,14 @@ foreach ($catnames as $catname)
     $options=$options."<option value=".$catname['id'].">".$catname['catname'].$catname['id']."</option>";
 }
 
+$budgetquery="SELECT SUM(budget) as value_sum FROM budget";
+$budget=$conn->query($budgetquery)->fetch(PDO::FETCH_ASSOC);
+
+$amountquery="SELECT SUM(amount) as value_sum FROM budget";
+$amount=$conn->query($amountquery)->fetch(PDO::FETCH_ASSOC);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -272,13 +280,20 @@ foreach ($catnames as $catname)
         <p>Relief Section</p>
         <div class="sidebar--menu">
             <a href="reliefMainPage.php">
-                <div class="sidebar--link">
+                <div class="sidebar--link  ">
                     <i class="fa fa-home"></i>
                     Overview
                 </div>
             </a>
 
             <h2>View</h2>
+            <a href="currentdisastersituation.php">
+                <div class="sidebar--link  ">
+
+                    <i class="fas fa-house-damage"></i>
+                    Current Disaster
+                </div>
+            </a>
             <a href="Budget.php">
                 <div class="sidebar--link active_menu_link">
 
@@ -289,51 +304,47 @@ foreach ($catnames as $catname)
 
             <a href="expenseBudget.php">
                 <div class="sidebar--link">
-                    <i class="fa fa-building-o"></i>
-                   Expense
+                    <i class="fas fa-money-check-alt"></i>
+                    Expense
                 </div>
             </a>
-            <div class="sidebar--link">
+            <div class="sidebar--link ">
                 <i class="fa fa-wrench"></i>
-                <a href="category.php">Category:</a>
+                <a href="category.php">Category</a>
             </div>
-            <div class="sidebar--link active">
+            <div class="sidebar--link ">
                 <i class="fa fa-archive"></i>
-                <a href="#">Total Distribution</a>
+                <a href="totalDistribution.php">Total Distribution</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-handshake-o"></i>
-                <a href="#">Lackings</a>
+                <i class="fa fa-list"></i>
+                <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
             <div class="sidebar--link">
-                <i class="fa fa-question"></i>
-                <a href="#">Update Budget & Expense</a>
+                <i class="fas fa-pen"></i>
+                <a href="addDistributionData.php">Add Distribution data</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-sign-out"></i>
-                <a href="#">Update Distribution list</a>
+                <i class="fas fa-pen"></i>
+                <a href="addaffectedpeople.php">Add Affected People</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-calendar-check-o"></i>
-                <a href="#">Lackings</a>
-            </div>
-            <div class="sidebar--link">
-                <i class="fa fa-files-o"></i>
-                <a href="#">Ration Calculator</a>
+                <i class="fas fa-calculator"></i>
+                <a href="rationCalculator.php">Ration Calculator</a>
             </div>
             <h2>Disaster View</h2>
             <div class="sidebar--link">
-                <i class="fa fa-money"></i>
-                <a href="#">Affected area</a>
+                <i class="fas fa-chart-area"></i>
+                <a href="affectedareaview.php">Affected area</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-briefcase"></i>
-                <a href="#"> Affected Structure</a>
+                <a href="affectedStructure.php"> Affected Structure</a>
             </div>
             <div class="sidebar--logout">
                 <i class="fa fa-power-off"></i>
-                <a href="#">Log out</a>
+                <a href="logout.php">Log out</a>
             </div>
         </div>
     </div>
@@ -346,7 +357,28 @@ foreach ($catnames as $catname)
 <script defer src="css/font/js/all.js"></script>
 <script src="boot/js/bootstrap.min.js"></script>\
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="js/reliefMainPagechart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: ['Budget', 'Amount'],
+            datasets: [{
+                label: 'Amount vs Budget ratio',
+                backgroundColor: ['rgb(255, 99, 132)','rgb(155, 155, 0)'],
+                borderColor: 'rgb(0, 0, 0)',
+                data: [<?php echo $budget['value_sum'];?>,<?php echo $amount['value_sum']?>]
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+</script>
 
 </body>
 </html>

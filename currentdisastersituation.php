@@ -16,47 +16,33 @@ if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 }
 else
 {
-    if (isset($_POST['update']))
+    $sql2="SELECT * from disaster";
+    $data = $conn->query($sql2);
+    $rows = $data->fetchALL(PDO::FETCH_ASSOC);
+    if (isset($_POST["name"]) && isset($_POST['division']))
     {
+        $sql= "INSERT INTO disaster (disastertype,division,district,jilla,thana,disasterName,occuringlat,occuringlan) VALUES(:disastertype,:division,:district,:upazilla,:thana,:name,:latitude,:longitude)";
+        $stmt= $conn->prepare($sql);
+        $stmt->execute(array(
 
-            $sql= "UPDATE affectedpeople SET status=:status WHERE id=:id;)";
-            $stmt= $conn->prepare($sql);
-            $stmt->execute(array(
-
-                ':id'=>htmlentities($_POST['id']),
-                ':status'=>"done",
-
-            ));
-            header("Location:addDistributionData.php");
-            $_SESSION['success']="Successful";
-            return;
-
-        }
+            ':division'=>htmlentities($_POST['division']),
+            ':disastertype'=>htmlentities($_POST['disastertype']),
+            ':district'=>htmlentities($_POST['district']),
+            ':upazilla'=>htmlentities($_POST['upazilla']),
+            ':thana'=>htmlentities($_POST['thana']),
+            ':name'=>htmlentities($_POST['name']),
+            ':latitude'=>($_POST['latitude']),
+            ':longitude'=>($_POST['longitude']),
 
 
+        ));
+        header("Location:currentdisastersituation.php");
+        $_SESSION['success']="Successful";
+        return;
+
+    }
 }
-$sql2="SELECT * from affectedpeople WHERE status='no' ";
-$data = $conn->query($sql2);
-$rows = $data->fetchALL(PDO::FETCH_ASSOC);
-
-$sql3="SELECT * from categoryname ";
-$data = $conn->query($sql3);
-$rows2 = $data->fetchALL(PDO::FETCH_ASSOC);
-
-
-$male=0;
-$female=0;
-$children=0;
-$totaldata=sizeof($rows);
-
-foreach ($rows as $row)
-{
-    $male= $male+$row['male'];
-    $female=$female+$row['female'];
-    $children=$children+$row['under_18'];
-
-}
-
+$data=["10","20","30"];
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +78,7 @@ foreach ($rows as $row)
                 <i class="fas fa-clock-o" aria-hidden="true"></i>
             </a>
             <a href="#">
-                <img width="30" src="img/avatar.png" alt="LoginPerson's img" />
+                <img width="30" src="<?php echo  $_SESSION['img'];?>" alt="LoginPerson's img" />
                 <!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i> -->
             </a>
         </div>
@@ -109,25 +95,18 @@ foreach ($rows as $row)
                     <p>Welcome to your relief dashboard</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col col-sm-6">
+                    <a href="mapdata.php" style="text-decoration:none"><button class="btn btn-info"> Map data </button></a>
+                </div>
+                <div class="col col-sm-6">
+                    <a href="windy.php" style="text-decoration:none"><button class="btn btn-info"> Weather Map data </button></a>
+                </div>
+            </div>
             <hr>
 
             <!--            ############Beginn Chart Budget############-->
-            <div class=" chart row budgetchart">
 
-                <div class="firstChart  col-sm-4">
-                    <canvas id="myChart"></canvas>
-                </div>
-                <div class="detailsforbudgetnotchart col-sm-8">
-                    <div class="  col-sm-4">
-                        <h4>Details:: </h4>
-                        <p>Total Data:<?php echo $totaldata ; ?> </p>
-                        <p>Total:<?php echo $male; ?></p>
-                        <p> Lackings:<?php echo $female ; ?></p>
-                    </div>
-                </div>
-
-
-            </div>
             <!--###########Chart end###################-->
             <hr>
             <p></p>
@@ -150,24 +129,67 @@ foreach ($rows as $row)
                     }
                     ?>
 
-                    <h3> ADD Distribution Data(Manual)</h3>
+                    <h3> Upcoming Disaster</h3>
                 </div>
                 <div class="form-content form-inline row">
                     <form method="post">
 
-
                         <div class="form-group">
-                            <label for="new"> NAME ::</label>
-                            <select style="height: 50px; width: 100px;" name="id" id="new"">
-                            <?php foreach ($rows as $row)
-                            {?>
-                            <option value="<?php echo $row['id']?>" > <?php echo $row['name']?> </option>
-                            <?php
-                            }
-                            ?>
+                            <label for="dis"> Disaster Type::</label>
+                            <select name="disastertype" id="dis"">
+                                <option selected> --Disaster Type--</option>
+                                <option value="Flood">Flood</option>
+                                <option value="Tsunami">Tsunami</option>
+                                <option value="Cyclone">Cyclone</option>
+                                <option value="EarthQuake">EarthQuake</option>
                             </select>
                         </div>
-                        <input id="" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="update" value="ADD">
+                        <div class="form-group">
+                            <label for="new"> Division::</label>
+                            <select name="division" id="new" ">
+                                <option selected> --Division--</option>
+                                <option value="Barishal">Barisal</option>
+                                <option value="Chattogram">Chattogram</option>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Mymensingh">Mymensingh</option>
+                                <option value="Rajshahi">Rajshahi</option>
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Sylhet">Sylhet</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="districtsele"> District::</label>
+                            <input name="district" id="districtsele" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="upa"> Jilla::</label>
+                            <input type="text" id="upa" required placeholder="Upazilla" name="upazilla">
+                        </div>
+                        <div class="form-group">
+                            <label for="category1">Thana:</label>
+                            <input type="text" id="category1" required placeholder="Thana" name="thana">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" required placeholder="Name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Latitude:</label>
+                            <input type="text" id="name" required placeholder="Latitude" name="latitude">
+                        </div>
+                        <div class="form-group">
+                            <label for="longitude">longitude:</label>
+                            <input type="text" id="longitude" required placeholder="Longitude" name="longitude">
+                        </div>
+
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label for="Population">Number</label>-->
+                        <!--                                <input type="text" required placeholder="Number" name="population">-->
+                        <!--                            </div>-->
+
+                        <input id="" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="add" value="ADD">
                     </form>
                 </div>
 
@@ -182,18 +204,16 @@ foreach ($rows as $row)
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th scope="col">Disaster Type</th>
                         <th scope="col">Division</th>
                         <th scope="col">District</th>
                         <th scope="col">Upazilla</th>
                         <th scope="col">Thana</th>
                         <th scope="col">Name</th>
-                        <th scope="col">House Holding</th>
-                        <th scope="col">Family Member</th>
-                        <th scope="col">Contact No</th>
-                        <th scope="col">Male</th>
-                        <th scope="col">Female</th>
-                        <th scope="col">Under_18</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Latitude</th>
+                        <th scope="col">Longitude</th>
+                        <th scope="col">Occuring_from</th>
+
 
                     </tr>
                     </thead>
@@ -202,6 +222,8 @@ foreach ($rows as $row)
                     foreach($rows as $row)
                     {
                         echo "<tr><td>";
+                        echo(htmlentities($row['disastertype']));
+                        echo " </td><td>";
                         echo(htmlentities($row['division']));
                         echo " </td><td>";
                         echo (htmlentities($row['district']));
@@ -210,22 +232,13 @@ foreach ($rows as $row)
                         echo " </td><td>";
                         echo (htmlentities($row['thana']));
                         echo " </td><td>";
-                        echo (htmlentities($row['name']));
+                        echo (htmlentities($row['disasterName']));
                         echo " </td><td>";
-                        echo (htmlentities($row['householding']));
+                        echo (htmlentities($row['started_at']));
                         echo " </td><td>";
-                        echo (htmlentities($row['familyMember']));
+                        echo (htmlentities($row['occuringlat']));
                         echo " </td><td>";
-                        echo (htmlentities($row['contact_no']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['male']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['female']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['under_18']));
-                        echo " </td><td>";
-
-                        echo "Not permitted";
+                        echo (htmlentities($row['occuringlan']));
                         echo "</td></tr>";
                     }
                     ?>
@@ -234,7 +247,6 @@ foreach ($rows as $row)
             </div>
 
 
-            <p> IS IT OK </p>
 
 
 
@@ -260,7 +272,7 @@ foreach ($rows as $row)
         <p>Relief Section</p>
         <div class="sidebar--menu">
             <a href="reliefMainPage.php">
-                <div class="sidebar--link  ">
+                <div class="sidebar--link ">
                     <i class="fa fa-home"></i>
                     Overview
                 </div>
@@ -268,7 +280,7 @@ foreach ($rows as $row)
 
             <h2>View</h2>
             <a href="currentdisastersituation.php">
-                <div class="sidebar--link  ">
+                <div class="sidebar--link active_menu_link ">
 
                     <i class="fas fa-house-damage"></i>
                     Current Disaster
@@ -301,7 +313,7 @@ foreach ($rows as $row)
                 <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
-            <div class="sidebar--link active_menu_link">
+            <div class="sidebar--link">
                 <i class="fas fa-pen"></i>
                 <a href="addDistributionData.php">Add Distribution data</a>
             </div>
@@ -337,32 +349,15 @@ foreach ($rows as $row)
 <script defer src="css/font/js/all.js"></script>
 <script src="boot/js/bootstrap.min.js"></script>\
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script >
-    var ctx2 = document.getElementById('myChart').getContext('2d');
-    var chart2 = new Chart(ctx2, {
-        // The type of chart we want to create
-        type: 'doughnut',
-
-        // The data for our dataset
-        data: {
-            labels: ['Male','Female','Child'],
-            datasets: [{
-                label: 'Ratio of Gender',
-                backgroundColor: ['rgb(255, 99, 132)','rgb(155, 155, 0)','rgb(255, 155, 155)'],
-                borderColor: 'rgb(0, 99, 132)',
-                data: [<?php echo $male ?>, <?php echo $female ?>, <?php echo $children?>]
-            }]
-        },
-
-        // Configuration options go here
-        options: {}
-    });
-</script>
 <script src="css/font/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+
 <script>
+    
 </script>
+
 </body>
 </html>
 

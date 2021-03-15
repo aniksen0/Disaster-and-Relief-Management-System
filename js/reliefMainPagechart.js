@@ -9,8 +9,8 @@ var chart = new Chart(ctx, {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(128,0,128)',
+            borderColor: 'rgb(0, 0, 0)',
             data: [0, 10, 5, 2, 20, 30, 45]
         }]
     },
@@ -31,7 +31,7 @@ var chart1 = new Chart(ctx1, {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(128,0,128)',
             borderColor: 'rgb(255, 99, 132)',
             data: [0, 10, 5, 2, 20, 30, 45]
         }]

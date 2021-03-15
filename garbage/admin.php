@@ -8,16 +8,7 @@
 session_start();
 
 require "connection.php";
-if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
-{
-    header("Location: Login_v1/login.php");
-    return;
-}
-if ($_SESSION['role']!=4)
-{
-    header("Location: AcessDenied.php");
-    return;
-}
+
 echo $_SESSION['name'];
 echo $_SESSION['role'];
 $_SESSION['active']="active"

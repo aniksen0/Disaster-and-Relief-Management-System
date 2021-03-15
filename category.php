@@ -13,13 +13,7 @@ if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
     header("Location:index.php");
     return;
 }
-else
-{
-    if ($_SESSION['role']<=2)
-    {
-        header("Location:AcessDenied.php");
-        return;
-    }
+
     else
     {
         if (isset($_POST['id']) && isset($_POST['category']))
@@ -46,7 +40,7 @@ else
             }
         }
 
-    }
+    
 
 
 
@@ -226,13 +220,20 @@ $rows = $data->fetchALL(PDO::FETCH_ASSOC);
         <p>Relief Section</p>
         <div class="sidebar--menu">
             <a href="reliefMainPage.php">
-                <div class="sidebar--link">
+                <div class="sidebar--link  ">
                     <i class="fa fa-home"></i>
                     Overview
                 </div>
             </a>
 
             <h2>View</h2>
+            <a href="currentdisastersituation.php">
+                <div class="sidebar--link  ">
+
+                    <i class="fas fa-house-damage"></i>
+                    Current Disaster
+                </div>
+            </a>
             <a href="Budget.php">
                 <div class="sidebar--link ">
 
@@ -242,8 +243,8 @@ $rows = $data->fetchALL(PDO::FETCH_ASSOC);
             </a>
 
             <a href="expenseBudget.php">
-                <div class="sidebar--link">
-                    <i class="fa fa-building-o"></i>
+                <div class="sidebar--link ">
+                    <i class="fas fa-money-check-alt"></i>
                     Expense
                 </div>
             </a>
@@ -251,30 +252,30 @@ $rows = $data->fetchALL(PDO::FETCH_ASSOC);
                 <i class="fa fa-wrench"></i>
                 <a href="category.php">Category</a>
             </div>
-            <div class="sidebar--link active">
+            <div class="sidebar--link ">
                 <i class="fa fa-archive"></i>
                 <a href="totalDistribution.php">Total Distribution</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-handshake-o"></i>
-                <a href="lackings.php">Lackings</a>
+                <i class="fa fa-list"></i>
+                <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
             <div class="sidebar--link">
-                <i class="fa fa-sign-out"></i>
+                <i class="fas fa-pen"></i>
                 <a href="addDistributionData.php">Add Distribution data</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-calendar-check-o"></i>
-                <a href="#">Lackings</a>
+                <i class="fas fa-pen"></i>
+                <a href="addaffectedpeople.php">Add Affected People</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-files-o"></i>
+                <i class="fas fa-calculator"></i>
                 <a href="rationCalculator.php">Ration Calculator</a>
             </div>
             <h2>Disaster View</h2>
             <div class="sidebar--link">
-                <i class="fa fa-money"></i>
+                <i class="fas fa-chart-area"></i>
                 <a href="affectedareaview.php">Affected area</a>
             </div>
             <div class="sidebar--link">

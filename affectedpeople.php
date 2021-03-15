@@ -32,7 +32,7 @@ else
                 ':children'=>htmlentities($_POST['children'])
 //       ############# need to work on that addid..........#################
             ));
-            header("Location:addpeople.php");
+            header("Location:affectedpeople.php");
             $_SESSION['success']="Successful";
             return;
 
@@ -40,7 +40,7 @@ else
         else
         {
             $_SESSION['error']="Please insert appropriate data";
-            header("Location:addpeople.php");
+            header("Location:affectedpeople.php");
             return;
         }
 
@@ -74,17 +74,13 @@ $totaldata=sizeof($rows);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/font/css/all.min.css" crossorigin="anonymous">
 
-    <link href="css/font/css/all.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <!-- Bootstrap CSS -->
-    <link href="css/mainStyle.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
-    <!--    <link rel="stylesheet" href="css/mainStyle.css">-->
-    <link href="boot/css/bootstrap.min.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link rel="stylesheeet" href="boot/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mainSidebar.css" >
     <link rel="stylesheet" href="css/mainStyle.css" >
-
+    <link href="css/mainStyle.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Relief Dashboard</title>
 </head>
 <body id="body">
@@ -306,7 +302,7 @@ $totaldata=sizeof($rows);
         <p>Relief Section</p>
         <div class="sidebar--menu">
             <a href="reliefMainPage.php">
-                <div class="sidebar--link">
+                <div class="sidebar--link active_menu_link">
                     <i class="fa fa-home"></i>
                     Overview
                 </div>
@@ -314,7 +310,7 @@ $totaldata=sizeof($rows);
 
             <h2>View</h2>
             <a href="Budget.php">
-                <div class="sidebar--link active_menu_link">
+                <div class="sidebar--link ">
 
                     <i class="fa fa-user-secret" aria-hidden="true"></i>
                     Budget
@@ -327,43 +323,39 @@ $totaldata=sizeof($rows);
                     Expense
                 </div>
             </a>
-            <div class="sidebar--link">
+            <div class="sidebar--link ">
                 <i class="fa fa-wrench"></i>
-                <a href="#">Category:: Expense</a>
+                <a href="category.php">Category</a>
             </div>
             <div class="sidebar--link active">
                 <i class="fa fa-archive"></i>
-                <a href="#">Total Distribution</a>
+                <a href="totalDistribution.php">Total Distribution</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-handshake-o"></i>
-                <a href="#">Lackings</a>
+                <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
             <div class="sidebar--link">
-                <i class="fa fa-question"></i>
-                <a href="#">Update Budget & Expense</a>
-            </div>
-            <div class="sidebar--link">
                 <i class="fa fa-sign-out"></i>
-                <a href="#">Update Distribution list</a>
+                <a href="addDistributionData.php">Add Distribution data</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-calendar-check-o"></i>
-                <a href="#">Lackings</a>
+                <a href="addaffectedpeople.php">Add Affected People</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-files-o"></i>
-                <a href="#">Ration Calculator</a>
+                <a href="rationCalculator.php">Ration Calculator</a>
             </div>
             <h2>Disaster View</h2>
             <div class="sidebar--link">
                 <i class="fa fa-money"></i>
-                <a href="#">Affected area</a>
+                <a href="affectedareaview.php">Affected area</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-briefcase"></i>
-                <a href="#"> Affected Structure</a>
+                <a href="affectedStructure.php"> Affected Structure</a>
             </div>
             <div class="sidebar--logout">
                 <i class="fa fa-power-off"></i>

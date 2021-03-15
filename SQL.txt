@@ -122,5 +122,31 @@ CREATE TABLE census(
     projectionChild int(30),
     PRIMARY KEY(number)
 );
-###################Creating table LOGIN#################
+###################Creating table affectedpeople#################
+CREATE TABLE affectedpeople 
+(
+    id int(30) AUTO_INCREMENT,
+    division varchar(30),
+    district varchar(30),
+    jilla varchar(30),
+    thana varchar(30),
+    householding varchar(30),
+    familyMember varchar(30),
+    contact_no varchar(30),
+    male varchar(30),
+    female varchar(30),
+    under_18 varchar(30),
+    PRIMARY KEY(id)
 
+);
+
+
+################create table Distribution data######################
+CREATE TABLE distributiondata
+(
+    id int(30) PRIMARY KEY,
+    relief_given varchar(30),
+    given_at timestamp,
+    FOREIGN KEY (id) REFERENCES affectedpeople(id)
+    
+);

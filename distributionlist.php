@@ -8,54 +8,47 @@
 // */
 session_start();
 require "connection.php";
+$data=0;
+$male = 0;
+$female = 0;
+$children = 0;
+$totaldata=0;
 
 if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 {
     header("Location:AcessDenied.php");
     return;
 }
-else
-{
-    if (isset($_POST['update']))
+else {
+    
+    if (isset($_POST['no']))
     {
+        header("Location:distributionlistpeople.php");
+        $_SESSION['distpeople']=$_POST['no'];
+        return;
 
-            $sql= "UPDATE affectedpeople SET status=:status WHERE id=:id;)";
-            $stmt= $conn->prepare($sql);
-            $stmt->execute(array(
-
-                ':id'=>htmlentities($_POST['id']),
-                ':status'=>"done",
-
-            ));
-            header("Location:addDistributionData.php");
-            $_SESSION['success']="Successful";
-            return;
-
-        }
+    }
 
 
+    $data=1;
+    $sql = "SELECT * FROM affectedpeople";
+    $stmt = $conn->query($sql);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $totaldata = sizeof($rows);
+    foreach ($rows as $row) {
+        $male = $male + $row['male'];
+        $female = $female + $row['female'];
+        $children = $children + $row['under_18'];
+
+    }
 }
-$sql2="SELECT * from affectedpeople WHERE status='no' ";
-$data = $conn->query($sql2);
-$rows = $data->fetchALL(PDO::FETCH_ASSOC);
-
-$sql3="SELECT * from categoryname ";
-$data = $conn->query($sql3);
-$rows2 = $data->fetchALL(PDO::FETCH_ASSOC);
+echo $male;
+echo $female;
+echo $children;
 
 
-$male=0;
-$female=0;
-$children=0;
-$totaldata=sizeof($rows);
 
-foreach ($rows as $row)
-{
-    $male= $male+$row['male'];
-    $female=$female+$row['female'];
-    $children=$children+$row['under_18'];
 
-}
 
 ?>
 
@@ -115,14 +108,25 @@ foreach ($rows as $row)
             <div class=" chart row budgetchart">
 
                 <div class="firstChart  col-sm-4">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart1"></canvas>
                 </div>
                 <div class="detailsforbudgetnotchart col-sm-8">
                     <div class="  col-sm-4">
                         <h4>Details:: </h4>
                         <p>Total Data:<?php echo $totaldata ; ?> </p>
-                        <p>Total:<?php echo $male; ?></p>
-                        <p> Lackings:<?php echo $female ; ?></p>
+                        <p> Male::<?php echo $male; ?></p>
+                        <p> Female::<?php echo $female ; ?></p>
+                        <p> Children::<?php echo $children ; ?></p>
+                    </div>
+
+
+                    <div class=" col-sm-4">
+                        <h3></h3>
+                        <p>Most populated Division::<?php echo $totaldata ; ?> </p>
+                        <p>Most populated District<?php echo $totaldata ; ?> </p>
+                        <p>Most populated Upazilla::<?php echo $totaldata ; ?> </p>
+                        <p>Status <?php echo "Calucalation pending."; ?></p>
+                        <!--                        calculation kora lagbe ration day er-->
                     </div>
                 </div>
 
@@ -132,51 +136,16 @@ foreach ($rows as $row)
             <hr>
             <p></p>
             <hr>
-            <!--            ###############Adding people form####################-->
-            <div class="formforbudget container justify-content-center align-content-center">
-                <div class="form-head">
-                    <?php
-                    if (isset($_SESSION['success']))
-                    {
-                        echo('<p style="color: white;" > SUCESS:::'.htmlentities($_SESSION['success'])."</p>\n");
-                        unset($_SESSION['success']);
+            <div class="form-content form-inline row bg-danger justify-content-center">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="new">Total People Relief We can Affort::</label>
+                        <input type="number" placeholder="Input People" name="no">
+                        <button type="submit" name="subs" class="btn btn-danger">Generate</button>
 
-                    }
-                    if (isset($_SESSION['error']))
-                    {
-                        echo('<p style="color: white;">ERROR::::'.htmlentities($_SESSION['error'])."</p>\n");
-                        unset($_SESSION['error']);
-
-                    }
-                    ?>
-
-                    <h3> ADD Distribution Data(Manual)</h3>
-                </div>
-                <div class="form-content form-inline row">
-                    <form method="post">
-
-
-                        <div class="form-group">
-                            <label for="new"> NAME ::</label>
-                            <select style="height: 50px; width: 100px;" name="id" id="new"">
-                            <?php foreach ($rows as $row)
-                            {?>
-                            <option value="<?php echo $row['id']?>" > <?php echo $row['name']?> </option>
-                            <?php
-                            }
-                            ?>
-                            </select>
-                        </div>
-                        <input id="" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="update" value="ADD">
-                    </form>
-                </div>
-
-
+                    </div>
+                </form>
             </div>
-
-
-            <!--            ###############Adding people form end here####################-->
-
             <div class="table tablebudget" style="overflow-x:auto;">
 
                 <table class="table table-hover">
@@ -186,55 +155,51 @@ foreach ($rows as $row)
                         <th scope="col">District</th>
                         <th scope="col">Upazilla</th>
                         <th scope="col">Thana</th>
-                        <th scope="col">Name</th>
                         <th scope="col">House Holding</th>
                         <th scope="col">Family Member</th>
                         <th scope="col">Contact No</th>
                         <th scope="col">Male</th>
                         <th scope="col">Female</th>
                         <th scope="col">Under_18</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Priority</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    foreach($rows as $row)
+                    if ($data>=1)
                     {
-                        echo "<tr><td>";
-                        echo(htmlentities($row['division']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['district']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['jilla']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['thana']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['name']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['householding']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['familyMember']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['contact_no']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['male']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['female']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['under_18']));
-                        echo " </td><td>";
+                        foreach($rows as $row)
+                        {
+                            ?>
+                             <tr>
+                                 <td><?php echo $row['division'];?></td>
+                                 <td><?php echo $row['district'];?></td>
+                                 <td><?php echo $row['jilla'];?></td>
+                                 <td><?php echo $row['thana'];?></td>
+                                 <td><?php echo $row['householding'];?></td>
+                                 <td><?php echo $row['familyMember'];?></td>
+                                 <td><?php echo $row['contact_no'];?></td>
+                                 <td><?php echo $row['male'];?></td>
+                                 <td><?php echo $row['female'];?></td>
+                                 <td><?php echo $row['under_18'];?></td>
+                                 <td><?php echo $row['Priority'];?></td>
 
-                        echo "Not permitted";
-                        echo "</td></tr>";
+                             </tr>
+                        <?php }
+
                     }
+                    else
+                    {
+                        echo "<p> no data </p>";
+                    }
+
                     ?>
+
                     </tbody>
                 </table>
             </div>
 
-
-            <p> IS IT OK </p>
 
 
 
@@ -296,12 +261,12 @@ foreach ($rows as $row)
                 <i class="fa fa-archive"></i>
                 <a href="totalDistribution.php">Total Distribution</a>
             </div>
-            <div class="sidebar--link">
+            <div class="sidebar--link active_menu_link">
                 <i class="fa fa-list"></i>
                 <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
-            <div class="sidebar--link active_menu_link">
+            <div class="sidebar--link">
                 <i class="fas fa-pen"></i>
                 <a href="addDistributionData.php">Add Distribution data</a>
             </div>
@@ -337,8 +302,11 @@ foreach ($rows as $row)
 <script defer src="css/font/js/all.js"></script>
 <script src="boot/js/bootstrap.min.js"></script>\
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script >
-    var ctx2 = document.getElementById('myChart').getContext('2d');
+<script src="css/font/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script>
+    var ctx2 = document.getElementById('myChart1').getContext('2d');
     var chart2 = new Chart(ctx2, {
         // The type of chart we want to create
         type: 'doughnut',
@@ -357,11 +325,6 @@ foreach ($rows as $row)
         // Configuration options go here
         options: {}
     });
-</script>
-<script src="css/font/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script>
 </script>
 </body>
 </html>

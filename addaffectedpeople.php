@@ -16,32 +16,46 @@ if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 }
 else
 {
-    if (isset($_POST['update']))
+    if (isset($_POST['male']) && isset($_POST['female'])&&isset($_POST['under18']))
     {
+        if (is_numeric($_POST['male'])&&is_numeric($_POST['female']))
+        {
 
-            $sql= "UPDATE affectedpeople SET status=:status WHERE id=:id;)";
+            $sql= "INSERT INTO affectedpeople (division,district,jilla,thana,name,householding,familyMember,contact_no,male,female,under_18,Priority) VALUES(:division,:district,:upazilla,:thana,:name,:house,:member,:contact,:male,:female,:under18,:Priority)";
             $stmt= $conn->prepare($sql);
             $stmt->execute(array(
-
-                ':id'=>htmlentities($_POST['id']),
-                ':status'=>"done",
-
+                ':division'=>htmlentities($_POST['division']),
+                ':district'=>htmlentities($_POST['district']),
+                ':upazilla'=>htmlentities($_POST['upazilla']),
+                ':thana'=>htmlentities($_POST['thana']),
+                ':name'=>htmlentities($_POST['name']),
+                ':house'=>htmlentities($_POST['householding']),
+                ':member'=>htmlentities($_POST['member']),
+                ':contact'=>htmlentities($_POST['contact']),
+                ':male'=>htmlentities($_POST['male']),
+                ':female'=>htmlentities($_POST['female']),
+                ':under18'=>htmlentities($_POST['under18']),
+                ':Priority'=>htmlentities($_POST['Priority']),
+//       ############# need to work on that addid..........#################
             ));
-            header("Location:addDistributionData.php");
+            header("Location:addaffectedpeople.php");
             $_SESSION['success']="Successful";
             return;
 
         }
+        else
+        {
+            $_SESSION['error']="Please insert appropriate data";
+            header("Location:addaffectedpeople.php");
+            return;
+        }
 
 
+    }
 }
-$sql2="SELECT * from affectedpeople WHERE status='no' ";
+$sql2="SELECT * from affectedpeople";
 $data = $conn->query($sql2);
 $rows = $data->fetchALL(PDO::FETCH_ASSOC);
-
-$sql3="SELECT * from categoryname ";
-$data = $conn->query($sql3);
-$rows2 = $data->fetchALL(PDO::FETCH_ASSOC);
 
 
 $male=0;
@@ -56,6 +70,9 @@ foreach ($rows as $row)
     $children=$children+$row['under_18'];
 
 }
+echo $male;
+echo $female;
+echo $children;
 
 ?>
 
@@ -121,8 +138,19 @@ foreach ($rows as $row)
                     <div class="  col-sm-4">
                         <h4>Details:: </h4>
                         <p>Total Data:<?php echo $totaldata ; ?> </p>
-                        <p>Total:<?php echo $male; ?></p>
-                        <p> Lackings:<?php echo $female ; ?></p>
+                        <p> Male::<?php echo $male; ?></p>
+                        <p> Female::<?php echo $female ; ?></p>
+                        <p> Children::<?php echo $children ; ?></p>
+                    </div>
+
+
+                    <div class=" col-sm-4">
+                        <h3></h3>
+                        <p>Most populated Division::<?php echo $totaldata ; ?> </p>
+                        <p>Most populated District<?php echo $totaldata ; ?> </p>
+                        <p>Most populated Upazilla::<?php echo $totaldata ; ?> </p>
+                        <p>Status <?php echo "Calucalation pending."; ?></p>
+                        <!--                        calculation kora lagbe ration day er-->
                     </div>
                 </div>
 
@@ -150,24 +178,82 @@ foreach ($rows as $row)
                     }
                     ?>
 
-                    <h3> ADD Distribution Data(Manual)</h3>
+                    <h3> Add People Data</h3>
                 </div>
                 <div class="form-content form-inline row">
                     <form method="post">
 
 
                         <div class="form-group">
-                            <label for="new"> NAME ::</label>
-                            <select style="height: 50px; width: 100px;" name="id" id="new"">
-                            <?php foreach ($rows as $row)
-                            {?>
-                            <option value="<?php echo $row['id']?>" > <?php echo $row['name']?> </option>
-                            <?php
-                            }
-                            ?>
+                            <label for="new"> Division::</label>
+                            <select name="division" id="new" onchange="displaydistrict()">
+                                <option selected> --Division--</option>
+                                <option value="Barishal">Barisal</option>
+                                <option value="Chattogram">Chattogram</option>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Khulna">Khulna</option>
+                                <option value="Mymensingh">Mymensingh</option>
+                                <option value="Rajshahi">Rajshahi</option>
+                                <option value="Rangpur">Rangpur</option>
+                                <option value="Sylhet">Sylhet</option>
+
                             </select>
                         </div>
-                        <input id="" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="update" value="ADD">
+
+                        <div class="form-group">
+                            <label for="districtsele"> District::</label>
+                            <input name="district" id="districtsele" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="upa"> Jilla::</label>
+                            <input type="text" id="upa" required placeholder="Upazilla" name="upazilla">
+                        </div>
+                        <div class="form-group">
+                            <label for="category1">Thana:</label>
+                            <input type="text" id="category1" required placeholder="Thana" name="thana">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" required placeholder="Name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="holding">House Holding:</label>
+                            <input type="text" id="holding" required placeholder="Holding" name="householding">
+                        </div>
+                        <div class="form-group">
+                            <label for="member">Family Member:</label>
+                            <input type="text" id="member" required placeholder="Member" name="member">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">Contact No:</label>
+                            <input type="text" id="contact" required placeholder="contact" name="contact">
+                        </div>
+                        <div class="form-group">
+                            <label for="male">Male:</label>
+                            <input type="text" id="male" required placeholder="male" name="male">
+                        </div>
+                        <div class="form-group">
+                            <label for="category2">Female:</label>
+                            <input type="text" id="category2" required placeholder="Number" name="female">
+                        </div>
+                        <div class="form-group">
+                            <label for="category3">Under 18</label>
+                            <input type="text" id="category3" required placeholder="Under 18" name="under18">
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Priority </label>
+                            <select id="priority" name="Priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">high</option>
+                            </select>
+                        </div>
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label for="Population">Number</label>-->
+                        <!--                                <input type="text" required placeholder="Number" name="population">-->
+                        <!--                            </div>-->
+
+                        <input id="" type="submit" style="color: #000;" class=" justify-content-center align-items-center btn btn-danger" name="add" value="ADD">
                     </form>
                 </div>
 
@@ -186,14 +272,13 @@ foreach ($rows as $row)
                         <th scope="col">District</th>
                         <th scope="col">Upazilla</th>
                         <th scope="col">Thana</th>
-                        <th scope="col">Name</th>
                         <th scope="col">House Holding</th>
                         <th scope="col">Family Member</th>
                         <th scope="col">Contact No</th>
                         <th scope="col">Male</th>
                         <th scope="col">Female</th>
                         <th scope="col">Under_18</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Priority</th>
 
                     </tr>
                     </thead>
@@ -210,8 +295,6 @@ foreach ($rows as $row)
                         echo " </td><td>";
                         echo (htmlentities($row['thana']));
                         echo " </td><td>";
-                        echo (htmlentities($row['name']));
-                        echo " </td><td>";
                         echo (htmlentities($row['householding']));
                         echo " </td><td>";
                         echo (htmlentities($row['familyMember']));
@@ -224,8 +307,7 @@ foreach ($rows as $row)
                         echo " </td><td>";
                         echo (htmlentities($row['under_18']));
                         echo " </td><td>";
-
-                        echo "Not permitted";
+                        echo (htmlentities($row['Priority']));
                         echo "</td></tr>";
                     }
                     ?>
@@ -234,7 +316,6 @@ foreach ($rows as $row)
             </div>
 
 
-            <p> IS IT OK </p>
 
 
 
@@ -301,11 +382,11 @@ foreach ($rows as $row)
                 <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
-            <div class="sidebar--link active_menu_link">
+            <div class="sidebar--link">
                 <i class="fas fa-pen"></i>
                 <a href="addDistributionData.php">Add Distribution data</a>
             </div>
-            <div class="sidebar--link">
+            <div class="sidebar--link active_menu_link">
                 <i class="fas fa-pen"></i>
                 <a href="addaffectedpeople.php">Add Affected People</a>
             </div>
@@ -337,7 +418,10 @@ foreach ($rows as $row)
 <script defer src="css/font/js/all.js"></script>
 <script src="boot/js/bootstrap.min.js"></script>\
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script >
+<script src="css/font/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script>
     var ctx2 = document.getElementById('myChart').getContext('2d');
     var chart2 = new Chart(ctx2, {
         // The type of chart we want to create
@@ -358,11 +442,7 @@ foreach ($rows as $row)
         options: {}
     });
 </script>
-<script src="css/font/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script>
-</script>
+
 </body>
 </html>
 

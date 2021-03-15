@@ -184,7 +184,7 @@ $rows = $data2->fetchALL(PDO::FETCH_ASSOC);
                         <div class="form-group col-sm-4">
                             <label for="amount">Expense</label>
                             <div class="input5">
-                                <input type="number" size="20px" placeholder="Add Cost" name="cost" required>
+                                <input id="amount" type="number" size="20px" placeholder="Add Cost" name="cost" required>
                             </div>
                         </div>
 
@@ -196,7 +196,7 @@ $rows = $data2->fetchALL(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="form btn-group col-sm-4 btnexpense">
-                            <input type="submit" id="expenseSub"  name="add" value="ADD">
+                            <input class="btn btn-info text-dark" type="submit" id="expenseSub"  name="add" value="ADD">
                         </div>
                         <div class="col-sm-4">
 
@@ -277,13 +277,20 @@ $rows = $data2->fetchALL(PDO::FETCH_ASSOC);
         <p>Relief Section</p>
         <div class="sidebar--menu">
             <a href="reliefMainPage.php">
-                <div class="sidebar--link">
+                <div class="sidebar--link  ">
                     <i class="fa fa-home"></i>
                     Overview
                 </div>
             </a>
 
             <h2>View</h2>
+            <a href="currentdisastersituation.php">
+                <div class="sidebar--link  ">
+
+                    <i class="fas fa-house-damage"></i>
+                    Current Disaster
+                </div>
+            </a>
             <a href="Budget.php">
                 <div class="sidebar--link ">
 
@@ -291,51 +298,50 @@ $rows = $data2->fetchALL(PDO::FETCH_ASSOC);
                     Budget
                 </div>
             </a>
-            <div class="sidebar--link active_menu_link">
-                <i class="fa fa-building-o"></i>
-                <a href="expenseBudget.php">Expense</a>
-            </div>
-            <div class="sidebar--link">
+
+            <a href="expenseBudget.php">
+                <div class="sidebar--link active_menu_link">
+                    <i class="fas fa-money-check-alt"></i>
+                    Expense
+                </div>
+            </a>
+            <div class="sidebar--link ">
                 <i class="fa fa-wrench"></i>
-                <a href="category.php">Category:</a>
+                <a href="category.php">Category</a>
             </div>
-            <div class="sidebar--link active">
+            <div class="sidebar--link ">
                 <i class="fa fa-archive"></i>
-                <a href="#">Total Distribution</a>
+                <a href="totalDistribution.php">Total Distribution</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-handshake-o"></i>
-                <a href="#">Lackings</a>
+                <i class="fa fa-list"></i>
+                <a href="distributionlist.php">Distribution List</a>
             </div>
             <h2>Update</h2>
             <div class="sidebar--link">
-                <i class="fa fa-question"></i>
-                <a href="#">Update Budget & Expense</a>
+                <i class="fas fa-pen"></i>
+                <a href="addDistributionData.php">Add Distribution data</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-sign-out"></i>
-                <a href="#">Update Distribution list</a>
+                <i class="fas fa-pen"></i>
+                <a href="addaffectedpeople.php">Add Affected People</a>
             </div>
             <div class="sidebar--link">
-                <i class="fa fa-calendar-check-o"></i>
-                <a href="#">Lackings</a>
-            </div>
-            <div class="sidebar--link">
-                <i class="fa fa-files-o"></i>
-                <a href="#">Ration Calculator</a>
+                <i class="fas fa-calculator"></i>
+                <a href="rationCalculator.php">Ration Calculator</a>
             </div>
             <h2>Disaster View</h2>
             <div class="sidebar--link">
-                <i class="fa fa-money"></i>
-                <a href="#">Affected area</a>
+                <i class="fas fa-chart-area"></i>
+                <a href="affectedareaview.php">Affected area</a>
             </div>
             <div class="sidebar--link">
                 <i class="fa fa-briefcase"></i>
-                <a href="#"> Affected Structure</a>
+                <a href="affectedStructure.php"> Affected Structure</a>
             </div>
             <div class="sidebar--logout">
                 <i class="fa fa-power-off"></i>
-                <a href="#">Log out</a>
+                <a href="logout.php">Log out</a>
             </div>
         </div>
     </div>
