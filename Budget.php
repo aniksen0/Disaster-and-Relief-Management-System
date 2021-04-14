@@ -8,6 +8,12 @@
 // */
 session_start();
 require "connection.php";
+echo time();
+if (!isset($_SESSION['id']))
+{
+    header("Location:index.php");
+    return;
+}
 if (isset($_POST['id']) && isset($_POST['product'])&&isset($_POST['budget'])&&isset($_POST['amount']) )
 {
     if (is_numeric($_POST['id'])&&is_numeric($_POST['amount'])&&is_numeric($_POST['budget']))
@@ -24,6 +30,17 @@ if (isset($_POST['id']) && isset($_POST['product'])&&isset($_POST['budget'])&&is
             ':catid'=>htmlentities($_POST['catid'])
 //       ############# need to work on that addid..........#################
         ));
+
+        date_default_timezone_set("Asia/Dhaka");
+        $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+        $stmt1= $conn->prepare($sql1);
+        $stmt1->execute(array(
+            ':id'=>htmlentities($_SESSION['id']) ,
+            ':action'=>"Added Budget Data",
+            ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+        ));
+
         header("Location:Budget.php");
         $_SESSION['success']="Successful";
         return;

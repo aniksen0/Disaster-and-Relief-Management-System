@@ -7,6 +7,7 @@
  */
 require_once "../connection.php";
 session_start();
+date_default_timezone_set("Asia/Dhaka");
 if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
 {
     header("Location: ../index.php");
@@ -22,9 +23,35 @@ if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
     header("Location: ../index.php");
     return;
 }
-$logquery="SELECT * FROM syslog";
-$logdata=$conn->query($logquery);
-$rows=$logdata->fetchAll(PDO::FETCH_ASSOC);
+$counter=0;
+if (isset($_POST['date']))
+{
+
+    $_SESSION['to']=$_POST['to'];
+    $_SESSION['from']=$_POST['from'];
+    header("Location:syslog1.php");
+    return;
+}
+if ($counter==1)
+{
+    $to=$_POST['to'];
+    $from=$_POST['from'];
+    $logquery1="SELECT * FROM syslog WHERE time BETWEEN '$from' AND '$to'";
+    $logdata1=$conn->query($logquery1);
+    $rows=$logdata1->fetchAll(PDO::FETCH_ASSOC);
+
+}
+else if ($counter==0)
+{
+    $from=date("Y-m-d 00:00:00");
+    $to=date("Y-m-d 23:00:00");
+    echo $to;
+    $logquery="SELECT * FROM syslog WHERE time BETWEEN '$from' AND '$to'";
+    $logdata=$conn->query($logquery);
+    $rows=$logdata->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -120,10 +147,13 @@ $rows=$logdata->fetchAll(PDO::FETCH_ASSOC);
                     <span class="navbar-toggler-icon icon-bar"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end">
-                    <form class="navbar-form">
+                    <form class="navbar-form" method="post">
                         <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                            <label for="from">From:</label>
+                            <input id="from" type="date" name="from" class="form-control" placeholder="Search...">
+                            <label for="to">To:</label>
+                            <input id="to" type="date" name="to" class="form-control" placeholder="Search...">
+                            <button type="submit" name="date" class="btn btn-white btn-round btn-just-icon">
                                 <i class="material-icons">search</i>
                                 <div class="ripple-container"></div>
                             </button>
@@ -132,39 +162,14 @@ $rows=$logdata->fetchAll(PDO::FETCH_ASSOC);
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="javascript:;">
-                                <i class="material-icons">dashboard</i>
                                 <p class="d-lg-none d-md-block">
                                     Stats
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">notifications</i>
-                                <span class="notification">5</span>
-                                <p class="d-lg-none d-md-block">
-                                    Some Actions
-                                </p>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                                <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                                <a class="dropdown-item" href="#">Another Notification</a>
-                                <a class="dropdown-item" href="#">Another One</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">person</i>
-                                <p class="d-lg-none d-md-block">
-                                    Account
-                                </p>
-                            </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../logout.php">Log out</a>
                             </div>
                         </li>

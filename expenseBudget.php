@@ -20,6 +20,15 @@ if(isset($_POST['id'])&&isset($_POST['name'])&&isset($_POST['cost'])&& isset($_P
         ':cost' => $_POST['cost'],
         ':sellerid' => 300
     ));
+        date_default_timezone_set("Asia/Dhaka");
+        $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+        $stmt1= $conn->prepare($sql1);
+        $stmt1->execute(array(
+            ':id'=>htmlentities($_SESSION['id']) ,
+            ':action'=>"Added expense Data",
+            ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+        ));
 
 
         $_SESSION['success'] = "Inserted";

@@ -36,6 +36,16 @@ else
 
 
         ));
+
+        date_default_timezone_set("Asia/Dhaka");
+        $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+        $stmt1= $conn->prepare($sql1);
+        $stmt1->execute(array(
+            ':id'=>htmlentities($_SESSION['id']) ,
+            ':action'=>"Added Disaster Data",
+            ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+        ));
         header("Location:currentdisastersituation.php");
         $_SESSION['success']="Successful";
         return;
@@ -234,11 +244,12 @@ $data=["10","20","30"];
                         echo " </td><td>";
                         echo (htmlentities($row['disasterName']));
                         echo " </td><td>";
-                        echo (htmlentities($row['started_at']));
+                        echo (htmlentities($row['occuringlan']));
                         echo " </td><td>";
                         echo (htmlentities($row['occuringlat']));
                         echo " </td><td>";
-                        echo (htmlentities($row['occuringlan']));
+                        echo (htmlentities($row['started_at']));
+
                         echo "</td></tr>";
                     }
                     ?>

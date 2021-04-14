@@ -44,6 +44,18 @@ foreach ($rows as $row) {
     $children = $children + $row['under_18'];
 
 }
+foreach ($medium as $row) {
+    $male = $male + $row['male'];
+    $female = $female + $row['female'];
+    $children = $children + $row['under_18'];
+
+}
+foreach ($low as $row) {
+    $male = $male + $row['male'];
+    $female = $female + $row['female'];
+    $children = $children + $row['under_18'];
+
+}
 if (isset($_POST['add']))
 {
     $sql= "UPDATE affectedpeople SET status=:status WHERE id=:id;)";

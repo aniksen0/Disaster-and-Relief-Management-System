@@ -28,6 +28,15 @@ require_once "connection.php";
                 ':pass'=> $pw
 
             ));
+            date_default_timezone_set("Asia/Dhaka");
+            $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+            $stmt1= $conn->prepare($sql1);
+            $stmt1->execute(array(
+                ':id'=>htmlentities($_SESSION['id']) ,
+                ':action'=>"Reseted password",
+                ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+            ));
             $_SESSION['success']="Record Updated";
 
 
@@ -96,7 +105,7 @@ require_once "connection.php";
 <div class="container">
     <div class=" text-center ">
         <p class="">Please change your <strong style="color:indianred"> one time password </strong> before Login.</p>
-        <p style="background-color: indianred; font-weight: bold">Parameter:Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters</p>
+        <p class="blinking" style="background-color: indianred; font-weight: bold;font-size: larger">Parameter:Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters</p>
     </div>
     <?php
     if (isset($_SESSION['success']))

@@ -27,6 +27,15 @@ if (!isset($_SESSION['role'])&&!isset($_SESSION['name']))
                     ':id'=>htmlentities($_POST['id']),
                     ':catname'=>htmlentities($_POST['category'])
                 ));
+                date_default_timezone_set("Asia/Dhaka");
+                $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+                $stmt1= $conn->prepare($sql1);
+                $stmt1->execute(array(
+                    ':id'=>htmlentities($_SESSION['id']) ,
+                    ':action'=>"Added Category Data",
+                    ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+                ));
                 header("Location:category.php");
                 $_SESSION['success']="Successful";
                 return;

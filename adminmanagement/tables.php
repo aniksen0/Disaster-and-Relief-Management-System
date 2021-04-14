@@ -220,31 +220,26 @@ $rows = $data->fetchALL(PDO::FETCH_ASSOC)
                                         <?php
                                         foreach($rows as $row)
                                         {
-                                            echo "<tr><td>";
-                                            echo (htmlentities($row['id']) );
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['name']));
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['mobile']));
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['address']));
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['email']));
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['emergency_contact_no']));
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['role']));
-                                            echo " </td><td>";
-                                            echo(htmlentities($row['doj']));
-                                            echo " </td><td>";
-                                            echo "<img src='".$row['imgdata']."' height='100' width='100'>'";
-                                            echo " </td><td>";
+                                            ?>
+                                             <tr>
+                                                <td><?php echo $row['id']; ?></td>
+                                                <td><?php echo $row['name']; ?></td>
+                                                 <td><?php echo $row['mobile']; ?></td>
+                                                 <td><?php echo $row['address']; ?></td>
+                                                <td><?php echo $row['email']; ?></td>
+                                                <td><?php echo $row['emergency_contact_no']; ?></td>
+                                                <td><?php echo $row['role']; ?></td>
+                                                <td><?php echo $row['doj']; ?></td>
+                                                <td><img src="<?php echo "../img/".$row['imgdata']; ?>" height="100" width="100"> </td>
+                                                 <td><a class="btn btn-info" href="edit.php?id='.$row['id'].'">Edit</a>
+                                                     <a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Delete</a>
+                                                     <a class="btn btn-info"  href="userprofile.php?id=<?php echo $row['id']?>">View</a>
+                                                 </td>
 
-                                            echo'<a href="edit.php?id='.$row['id'].'">Edit</a>';
-                                            echo"/";
-                                            echo'<a href="delete.php?id='.$row['id'].'">Delete</a>';
-                                            echo "</td></tr>";
-                                        }
+                                             </tr>
+
+
+                                       <?php }
                                         ?>
                                         </tbody>
                                     </table>

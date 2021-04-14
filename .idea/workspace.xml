@@ -2,28 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6469c19d-4a66-476e-9ce1-6df5d3339dd2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/addaffectedpeople.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/currentdisastersituation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/distributionlist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/distributionlistpeople.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Login_v1/images/img-01.png" afterPath="$PROJECT_DIR$/Login_v1/images/img-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminmanagement/syslog1.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/generateReport.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Budget.php" afterPath="$PROJECT_DIR$/Budget.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SQL.txt" afterPath="$PROJECT_DIR$/SQL.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addDistributionData.php" afterPath="$PROJECT_DIR$/addDistributionData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addaffectedpeople.php" afterPath="$PROJECT_DIR$/addaffectedpeople.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminmanagement/dashboard.php" afterPath="$PROJECT_DIR$/adminmanagement/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminmanagement/script.js" afterPath="$PROJECT_DIR$/adminmanagement/script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/affectedareaview.php" afterPath="$PROJECT_DIR$/affectedareaview.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminmanagement/syslog.php" afterPath="$PROJECT_DIR$/adminmanagement/syslog.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminmanagement/tables.php" afterPath="$PROJECT_DIR$/adminmanagement/tables.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/affectedpeople.php" afterPath="$PROJECT_DIR$/affectedpeople.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/category.php" afterPath="$PROJECT_DIR$/category.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/mainStyle.css" afterPath="$PROJECT_DIR$/css/mainStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/currentdisastersituation.php" afterPath="$PROJECT_DIR$/currentdisastersituation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/distributionlistpeople.php" afterPath="$PROJECT_DIR$/distributionlistpeople.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/expenseBudget.php" afterPath="$PROJECT_DIR$/expenseBudget.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/garbage/admin.php" afterPath="$PROJECT_DIR$/garbage/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/img/logo.svg" afterPath="$PROJECT_DIR$/img/logo.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/reliefMainPagechart.js" afterPath="$PROJECT_DIR$/js/reliefMainPagechart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/passreset.php" afterPath="$PROJECT_DIR$/passreset.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rationCalculator.php" afterPath="$PROJECT_DIR$/rationCalculator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reliefMainPage.php" afterPath="$PROJECT_DIR$/reliefMainPage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/totalDistribution.php" afterPath="$PROJECT_DIR$/totalDistribution.php" />
     </list>
     <ignored path="varsityProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,43 +41,92 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="currentdisastersituation.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/currentdisastersituation.php">
+      <file leaf-file-name="rationCalculator.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rationCalculator.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="2159">
+              <caret line="127" column="39" selection-start-line="127" selection-start-column="39" selection-end-line="127" selection-end-column="39" />
               <folding>
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1615801318354" expanded="true" signature="276:290" ph="SELECT * fro... affectedpeople" />
-                <marker date="1615801318354" expanded="true" signature="276:298" ph="SELECT * fro... disaster" />
-                <marker date="1615801318354" expanded="true" signature="462:650" ph="INSERT INTO disaster... " />
-                <marker date="1615801318354" expanded="true" signature="4408:4421" ph="..." />
-                <marker date="1615801318354" expanded="true" signature="4671:4684" ph="..." />
+                <marker date="1616531327702" expanded="true" signature="231:259" ph="SELECT * FRO... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="344:390" ph="SELECT * FRO... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="477:503" ph="SELECT * FRO... categoryname" />
+                <marker date="1616531327702" expanded="true" signature="589:611" ph="SELECT * FRO... disaster" />
+                <marker date="1616531327702" expanded="true" signature="702:722" ph="SELECT * FRO... budget" />
+                <marker date="1616531327702" expanded="true" signature="812:833" ph="SELECT * FRO... expense" />
+                <marker date="1616531327702" expanded="true" signature="934:960" ph="SELECT * FRO... eachdonation" />
+                <marker date="1616531327702" expanded="true" signature="1084:1127" ph="SELECT SUM(b... budget" />
+                <marker date="1616531327702" expanded="true" signature="1206:1249" ph="SELECT SUM(a... budget" />
+                <marker date="1616531327702" expanded="true" signature="1373:1430" ph="SELECT SUM(f... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="1539:1588" ph="SELECT SUM(f... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="1771:1872" ph="SELECT * FRO... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="2060:2163" ph="SELECT * FRO... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="2422:2522" ph="SELECT * FRO... affectedpeople" />
+                <marker date="1616531327702" expanded="true" signature="3166:3219" ph="UPDATE affec... " />
+                <marker date="1616531327702" expanded="true" signature="3424:3486" ph="INSERT INTO syslog... " />
+                <marker date="1616531327702" expanded="true" signature="4018:4075" ph="UPDATE eachd... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mapdata.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapdata.php">
+      <file leaf-file-name="syslog.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adminmanagement/syslog.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
+            <state relative-caret-position="544">
+              <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
               <folding>
-                <marker date="1615811916392" expanded="true" signature="57:77" ph="SELECT * fro... census" />
+                <marker date="1616568032065" expanded="true" signature="737:789" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="737:794" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1028" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1039" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1060" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1061" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1062" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1065" ph="SELECT * FRO... syslog" />
+                <marker date="1616568032065" expanded="true" signature="1008:1066" ph="SELECT * FRO... syslog" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="windy.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/windy.php">
+      <file leaf-file-name="syslog1.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/adminmanagement/syslog1.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="73" column="56" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
+            <state relative-caret-position="34">
+              <caret line="116" column="28" selection-start-line="116" selection-start-column="28" selection-end-line="116" selection-end-column="28" />
               <folding>
-                <marker date="1615822585550" expanded="true" signature="58:128" ph="SELECT * fro... disaster" />
+                <marker date="1616569277966" expanded="true" signature="566:622" ph="SELECT * FRO... syslog" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expenseBudget.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/expenseBudget.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="48" />
+              <folding>
+                <marker date="1616270572820" expanded="true" signature="304:381" ph="INSERT INTO expense... " />
+                <marker date="1616270572820" expanded="true" signature="760:822" ph="INSERT INTO syslog... " />
+                <marker date="1616270572820" expanded="true" signature="2022:2043" ph="Select * fro... expense" />
+                <marker date="1616270572820" expanded="true" signature="4901:4914" ph="..." />
+                <marker date="1616270572820" expanded="true" signature="5112:5125" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="passreset.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/passreset.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" column="44" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
+              <folding>
+                <marker date="1616270601234" expanded="true" signature="491:531" ph="UPDATE login... " />
+                <marker date="1616270601234" expanded="true" signature="768:830" ph="INSERT INTO syslog... " />
+                <marker date="1616270601234" expanded="true" signature="3387:3400" ph="..." />
+                <marker date="1616270601234" expanded="true" signature="3570:3583" ph="..." />
               </folding>
             </state>
           </provider>
@@ -104,15 +149,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cutted" />
-        <option value="$PROJECT_DIR$/connection.php" />
-        <option value="$PROJECT_DIR$/admin.html" />
-        <option value="$PROJECT_DIR$/newreg.html" />
         <option value="$PROJECT_DIR$/AcessDenied.html" />
         <option value="$PROJECT_DIR$/admin.php" />
         <option value="$PROJECT_DIR$/registration.php" />
         <option value="$PROJECT_DIR$/addpeople.php" />
-        <option value="$PROJECT_DIR$/css/mainStyle.css" />
         <option value="$PROJECT_DIR$/learnChartjs.php" />
         <option value="$PROJECT_DIR$/SystemLog.php" />
         <option value="$PROJECT_DIR$/admin/dashboard.php" />
@@ -127,34 +167,39 @@
         <option value="$PROJECT_DIR$/../Login/index.php" />
         <option value="$PROJECT_DIR$/tst.php" />
         <option value="$PROJECT_DIR$/test.php" />
-        <option value="$PROJECT_DIR$/passreset.php" />
         <option value="$PROJECT_DIR$/AcessDenied.php" />
-        <option value="$PROJECT_DIR$/adminmanagement/tables.php" />
-        <option value="$PROJECT_DIR$/adminmanagement/syslog.php" />
         <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/adminmanagement/syscheck.php" />
         <option value="$PROJECT_DIR$/adminmanagement/user1.php" />
         <option value="$PROJECT_DIR$/lackings.php" />
-        <option value="$PROJECT_DIR$/adminmanagement/dashboard.php" />
         <option value="$PROJECT_DIR$/affectedareaview.php" />
         <option value="$PROJECT_DIR$/mainSidebar.html" />
-        <option value="$PROJECT_DIR$/affectedpeople.php" />
         <option value="$PROJECT_DIR$/js/reliefMainPagechart.js" />
         <option value="$PROJECT_DIR$/adminmanagement/script.js" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/distributionlistpeople.php" />
         <option value="$PROJECT_DIR$/reliefMainPage.php" />
-        <option value="$PROJECT_DIR$/Budget.php" />
-        <option value="$PROJECT_DIR$/expenseBudget.php" />
-        <option value="$PROJECT_DIR$/category.php" />
         <option value="$PROJECT_DIR$/totalDistribution.php" />
         <option value="$PROJECT_DIR$/distributionlist.php" />
-        <option value="$PROJECT_DIR$/addDistributionData.php" />
-        <option value="$PROJECT_DIR$/addaffectedpeople.php" />
-        <option value="$PROJECT_DIR$/rationCalculator.php" />
-        <option value="$PROJECT_DIR$/currentdisastersituation.php" />
         <option value="$PROJECT_DIR$/mapdata.php" />
         <option value="$PROJECT_DIR$/windy.php" />
+        <option value="$PROJECT_DIR$/distributionlistpeople.php" />
+        <option value="$PROJECT_DIR$/adminmanagement/dashboard.php" />
+        <option value="$PROJECT_DIR$/generateReport.php" />
+        <option value="$PROJECT_DIR$/css/mainStyle.css" />
+        <option value="$PROJECT_DIR$/adminmanagement/css/css.css" />
+        <option value="$PROJECT_DIR$/adminmanagement/tables.php" />
+        <option value="$PROJECT_DIR$/adminmanagement/userprofile.php" />
+        <option value="$PROJECT_DIR$/Budget.php" />
+        <option value="$PROJECT_DIR$/addaffectedpeople.php" />
+        <option value="$PROJECT_DIR$/addDistributionData.php" />
+        <option value="$PROJECT_DIR$/affectedpeople.php" />
+        <option value="$PROJECT_DIR$/category.php" />
+        <option value="$PROJECT_DIR$/currentdisastersituation.php" />
+        <option value="$PROJECT_DIR$/expenseBudget.php" />
+        <option value="$PROJECT_DIR$/passreset.php" />
+        <option value="$PROJECT_DIR$/rationCalculator.php" />
+        <option value="$PROJECT_DIR$/adminmanagement/syslog.php" />
+        <option value="$PROJECT_DIR$/adminmanagement/syslog1.php" />
       </list>
     </option>
   </component>
@@ -228,7 +273,21 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="varsityProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="varsityProject" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adminmanagement" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -240,7 +299,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Learninglaravel" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -340,17 +399,27 @@
       <workItem from="1615190959864" duration="643000" />
       <workItem from="1615240691832" duration="235000" />
       <workItem from="1615738934623" duration="24263000" />
+      <workItem from="1615904532920" duration="974000" />
+      <workItem from="1615955505538" duration="1335000" />
+      <workItem from="1615994318355" duration="13981000" />
+      <workItem from="1616057709098" duration="1179000" />
+      <workItem from="1616146544372" duration="2773000" />
+      <workItem from="1616217352841" duration="1401000" />
+      <workItem from="1616248000866" duration="6392000" />
+      <workItem from="1616261721212" duration="9486000" />
+      <workItem from="1616565447629" duration="3035000" />
+      <workItem from="1616868016191" duration="46000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266411000" />
+    <option name="totallyTimeSpent" value="307013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15885799" sideWeight="0.5" order="0" side_tool="true" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.193265" sideWeight="0.5" order="0" side_tool="true" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -387,44 +456,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/tables.php" />
-    <entry file="file://$PROJECT_DIR$/Login_v1/login.php" />
-    <entry file="file://$PROJECT_DIR$/login.php" />
-    <entry file="file://$PROJECT_DIR$/DisasterManagement/disasterCategory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DisasterManagement/weatherNow.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DisasterManagement/Alert.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DisasterManagement/ActionList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/actionCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminmanagement/script.php" />
     <entry file="file://$PROJECT_DIR$/adminmanagement/notification.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -457,20 +488,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminmanagement/tables.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminmanagement/syslog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminmanagement/syscheck.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -482,13 +499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminmanagement/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3515">
-          <caret line="352" column="28" selection-start-line="352" selection-start-column="28" selection-end-line="352" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -513,13 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/affectedStructure.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/connection.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -538,13 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
           <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/passreset.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="119" column="91" selection-start-line="119" selection-start-column="88" selection-end-line="119" selection-end-column="91" />
         </state>
       </provider>
     </entry>
@@ -590,100 +586,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/reliefMainPagechart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/affectedpeople.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2495">
-          <caret line="335" column="13" selection-start-line="335" selection-start-column="13" selection-end-line="335" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
-          <folding>
-            <marker date="1615779908753" expanded="true" signature="609:801" ph="SELECT login... login" />
-            <marker date="1615779908753" expanded="true" signature="1333:1386" ph="INSERT INTO online1... " />
-            <marker date="1615779908753" expanded="true" signature="2143:2190" ph="..." />
-            <marker date="1615779908753" expanded="true" signature="3857:3870" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/distributionlistpeople.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="248" column="72" selection-start-line="248" selection-start-column="72" selection-end-line="248" selection-end-column="72" />
-          <folding>
-            <element signature="n#style#0;n#div#3;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1615783643574" expanded="true" signature="175:276" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615783643574" expanded="true" signature="462:565" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615783643574" expanded="true" signature="462:566" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615783643574" expanded="true" signature="822:921" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615783643574" expanded="true" signature="822:922" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615783643574" expanded="true" signature="1266:1319" ph="UPDATE affec... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Budget.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="297" column="58" selection-start-line="297" selection-start-column="58" selection-end-line="297" selection-end-column="58" />
-          <folding>
-            <marker date="1615790078178" expanded="true" signature="365:438" ph="INSERT INTO budget... " />
-            <marker date="1615790078178" expanded="true" signature="1142:1191" ph="SELECT id,ca... budget" />
-            <marker date="1615790078178" expanded="true" signature="1495:1521" ph="SELECT * FRO... categoryname" />
-            <marker date="1615790078178" expanded="true" signature="1788:1831" ph="SELECT SUM(b... budget" />
-            <marker date="1615790078178" expanded="true" signature="1910:1953" ph="SELECT SUM(a... budget" />
-            <marker date="1615790078178" expanded="true" signature="5702:5715" ph="..." />
-            <marker date="1615790078178" expanded="true" signature="5965:5978" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/expenseBudget.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="302" column="58" selection-start-line="302" selection-start-column="58" selection-end-line="302" selection-end-column="58" />
-          <folding>
-            <marker date="1615790113722" expanded="true" signature="304:381" ph="INSERT INTO expense... " />
-            <marker date="1615790113722" expanded="true" signature="1595:1616" ph="Select * fro... expense" />
-            <marker date="1615790113722" expanded="true" signature="4474:4487" ph="..." />
-            <marker date="1615790113722" expanded="true" signature="4685:4698" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/category.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="250" column="54" selection-start-line="250" selection-start-column="54" selection-end-line="250" selection-end-column="54" />
-          <folding>
-            <marker date="1615790168223" expanded="true" signature="419:464" ph="INSERT INTO categoryname... " />
-            <marker date="1615790168223" expanded="true" signature="1045:1071" ph="SELECT * fro... categoryname" />
-            <marker date="1615790168223" expanded="true" signature="3758:3771" ph="..." />
-            <marker date="1615790168223" expanded="true" signature="4021:4034" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/distributionlist.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="263" column="54" selection-start-line="263" selection-start-column="54" selection-end-line="263" selection-end-column="54" />
-          <folding>
-            <marker date="1615790285647" expanded="true" signature="518:546" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615790285647" expanded="true" signature="920:939" ph="..." />
-            <marker date="1615790285647" expanded="true" signature="7283:7307" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -691,54 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="262" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1615790016806" expanded="true" signature="231:259" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615790016806" expanded="true" signature="345:393" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615790016806" expanded="true" signature="481:507" ph="SELECT * FRO... categoryname" />
-            <marker date="1615790016806" expanded="true" signature="593:607" ph="SELECT * FRO... categoryname" />
-            <marker date="1615790016806" expanded="true" signature="593:615" ph="SELECT * FRO... disaster" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rationCalculator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1781">
-          <caret line="333" column="54" selection-start-line="333" selection-start-column="54" selection-end-line="333" selection-end-column="54" />
-          <folding>
-            <marker date="1615790521106" expanded="true" signature="231:259" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615790521106" expanded="true" signature="345:393" ph="SELECT * FRO... affectedpeople" />
-            <marker date="1615790521106" expanded="true" signature="481:507" ph="SELECT * FRO... categoryname" />
-            <marker date="1615790521106" expanded="true" signature="593:615" ph="SELECT * FRO... disaster" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addaffectedpeople.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="390" column="46" selection-start-line="390" selection-start-column="46" selection-end-line="390" selection-end-column="46" />
-          <folding>
-            <marker date="1615790440216" expanded="true" signature="455:693" ph="INSERT INTO affectedpeople... " />
-            <marker date="1615790440216" expanded="true" signature="1908:1936" ph="SELECT * fro... affectedpeople" />
-            <marker date="1615790440216" expanded="true" signature="6067:6080" ph="..." />
-            <marker date="1615790440216" expanded="true" signature="6330:6343" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addDistributionData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="303" column="54" selection-start-line="303" selection-start-column="54" selection-end-line="303" selection-end-column="54" />
-          <folding>
-            <marker date="1615790404604" expanded="true" signature="324:377" ph="UPDATE affec... " />
-            <marker date="1615790404604" expanded="true" signature="706:752" ph="SELECT * fro... affectedpeople" />
-            <marker date="1615790404604" expanded="true" signature="836:862" ph="SELECT * fro... categoryname" />
-            <marker date="1615790404604" expanded="true" signature="4359:4372" ph="..." />
-            <marker date="1615790404604" expanded="true" signature="4622:4635" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,31 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="264" column="26" selection-start-line="264" selection-start-column="26" selection-end-line="264" selection-end-column="26" />
-          <folding>
-            <marker date="1615790246872" expanded="true" signature="320:373" ph="UPDATE affec... " />
-            <marker date="1615790246872" expanded="true" signature="666:708" ph="SELECT * fro... affectedpeople" />
-            <marker date="1615790246872" expanded="true" signature="666:714" ph="SELECT * fro... affectedpeople" />
-            <marker date="1615790246872" expanded="true" signature="797:823" ph="SELECT * fro... categoryname" />
-            <marker date="1615790246872" expanded="true" signature="1143:1162" ph="..." />
-            <marker date="1615790246872" expanded="true" signature="4320:4333" ph="..." />
-            <marker date="1615790246872" expanded="true" signature="4583:4596" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/currentdisastersituation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#1;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1615801318354" expanded="true" signature="276:290" ph="SELECT * fro... affectedpeople" />
-            <marker date="1615801318354" expanded="true" signature="276:298" ph="SELECT * fro... disaster" />
-            <marker date="1615801318354" expanded="true" signature="462:650" ph="INSERT INTO disaster... " />
-            <marker date="1615801318354" expanded="true" signature="4408:4421" ph="..." />
-            <marker date="1615801318354" expanded="true" signature="4671:4684" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -778,18 +611,223 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
-          <folding>
-            <marker date="1615811916392" expanded="true" signature="57:77" ph="SELECT * fro... census" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/windy.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="1241">
           <caret line="73" column="56" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/reliefMainPagechart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="19" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/distributionlistpeople.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4709">
+          <caret line="277" column="28" selection-start-line="180" selection-start-column="20" selection-end-line="277" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/js/plugins/moment.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/js/plugins/chartist.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1615822585550" expanded="true" signature="58:128" ph="SELECT * fro... disaster" />
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="440" column="14" selection-start-line="440" selection-start-column="14" selection-end-line="440" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/mainStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4335">
+          <caret line="255" column="1" selection-start-line="255" selection-start-column="1" selection-end-line="255" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generateReport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/css/css.php" />
+    <entry file="file://$PROJECT_DIR$/adminmanagement/css/css.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/tables.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="235" column="99" selection-start-line="235" selection-start-column="99" selection-end-line="235" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/userprofile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Budget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="41" column="11" selection-start-line="33" selection-start-column="8" selection-end-line="41" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addDistributionData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addaffectedpeople.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="48" column="15" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/affectedStructure.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/affectedpeople.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/distributionlist.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/currentdisastersituation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="44" column="39" selection-start-line="44" selection-start-column="39" selection-end-line="44" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/passreset.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="44" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
+          <folding>
+            <marker date="1616270601234" expanded="true" signature="491:531" ph="UPDATE login... " />
+            <marker date="1616270601234" expanded="true" signature="768:830" ph="INSERT INTO syslog... " />
+            <marker date="1616270601234" expanded="true" signature="3387:3400" ph="..." />
+            <marker date="1616270601234" expanded="true" signature="3570:3583" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rationCalculator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="127" column="39" selection-start-line="127" selection-start-column="39" selection-end-line="127" selection-end-column="39" />
+          <folding>
+            <marker date="1616531327702" expanded="true" signature="231:259" ph="SELECT * FRO... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="344:390" ph="SELECT * FRO... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="477:503" ph="SELECT * FRO... categoryname" />
+            <marker date="1616531327702" expanded="true" signature="589:611" ph="SELECT * FRO... disaster" />
+            <marker date="1616531327702" expanded="true" signature="702:722" ph="SELECT * FRO... budget" />
+            <marker date="1616531327702" expanded="true" signature="812:833" ph="SELECT * FRO... expense" />
+            <marker date="1616531327702" expanded="true" signature="934:960" ph="SELECT * FRO... eachdonation" />
+            <marker date="1616531327702" expanded="true" signature="1084:1127" ph="SELECT SUM(b... budget" />
+            <marker date="1616531327702" expanded="true" signature="1206:1249" ph="SELECT SUM(a... budget" />
+            <marker date="1616531327702" expanded="true" signature="1373:1430" ph="SELECT SUM(f... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="1539:1588" ph="SELECT SUM(f... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="1771:1872" ph="SELECT * FRO... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="2060:2163" ph="SELECT * FRO... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="2422:2522" ph="SELECT * FRO... affectedpeople" />
+            <marker date="1616531327702" expanded="true" signature="3166:3219" ph="UPDATE affec... " />
+            <marker date="1616531327702" expanded="true" signature="3424:3486" ph="INSERT INTO syslog... " />
+            <marker date="1616531327702" expanded="true" signature="4018:4075" ph="UPDATE eachd... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/expenseBudget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="48" />
+          <folding>
+            <marker date="1616270572820" expanded="true" signature="304:381" ph="INSERT INTO expense... " />
+            <marker date="1616270572820" expanded="true" signature="760:822" ph="INSERT INTO syslog... " />
+            <marker date="1616270572820" expanded="true" signature="2022:2043" ph="Select * fro... expense" />
+            <marker date="1616270572820" expanded="true" signature="4901:4914" ph="..." />
+            <marker date="1616270572820" expanded="true" signature="5112:5125" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/syslog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+          <folding>
+            <marker date="1616568032065" expanded="true" signature="737:789" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="737:794" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1028" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1039" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1060" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1061" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1062" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1065" ph="SELECT * FRO... syslog" />
+            <marker date="1616568032065" expanded="true" signature="1008:1066" ph="SELECT * FRO... syslog" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminmanagement/syslog1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="116" column="28" selection-start-line="116" selection-start-column="28" selection-end-line="116" selection-end-column="28" />
+          <folding>
+            <marker date="1616569277966" expanded="true" signature="566:622" ph="SELECT * FRO... syslog" />
           </folding>
         </state>
       </provider>

@@ -27,6 +27,16 @@ else
                 ':status'=>"done",
 
             ));
+
+        date_default_timezone_set("Asia/Dhaka");
+        $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+        $stmt1= $conn->prepare($sql1);
+        $stmt1->execute(array(
+            ':id'=>htmlentities($_SESSION['id']) ,
+            ':action'=>"Added Distribution Data",
+            ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+        ));
             header("Location:addDistributionData.php");
             $_SESSION['success']="Successful";
             return;

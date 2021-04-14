@@ -150,3 +150,16 @@ CREATE TABLE distributiondata
     FOREIGN KEY (id) REFERENCES affectedpeople(id)
     
 );
+
+
+
+
+################create table donation data######################
+CREATE TABLE eachdonation
+(
+    id int(30) PRIMARY KEY,
+    donationtaka varchar(30)
+);
+
+
+################create table Distribution data######################

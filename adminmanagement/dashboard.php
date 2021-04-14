@@ -40,6 +40,18 @@ $data2 = $conn->query($action);
 $time=$data2->fetch(PDO::FETCH_ASSOC);
 $number2=$data2->rowCount();
 
+$action1="SELECT * from affectedpeople where status='no'";
+$data3 = $conn->query($action1);
+$total=$data3->fetch(PDO::FETCH_ASSOC);
+$total2=$data2->rowCount();
+
+
+$done1="SELECT * from affectedpeople where status='done'";
+$data4 = $conn->query($done1);
+$done=$data4->fetch(PDO::FETCH_ASSOC);
+$done3=$data4->rowCount();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,22 +164,7 @@ $number2=$data2->rowCount();
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">notifications</i>
-                                <span class="notification">5</span>
-                                <p class="d-lg-none d-md-block">
-                                    Some Actions
-                                </p>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                                <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                                <a class="dropdown-item" href="#">Another Notification</a>
-                                <a class="dropdown-item" href="#">Another One</a>
-                            </div>
-                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">person</i>
@@ -275,9 +272,9 @@ $number2=$data2->rowCount();
                                 <div class="ct-chart" id="dailySalesChart"></div>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">Etnry data</h4>
+                                <h4 class="card-title">Entry data</h4>
                                 <p class="card-category">
-                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today data.</p>
+                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> <?php echo $total ?></span> increase in today data.</p>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -309,7 +306,7 @@ $number2=$data2->rowCount();
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title">Completed Tasks</h4>
-                                <p class="card-category">Last Campaign Performance</p>
+                                <p class="card-category"></p>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">

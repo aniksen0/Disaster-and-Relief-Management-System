@@ -13,13 +13,11 @@ if (!$_SESSION['id']&&!$_SESSION['role'])
 }
 $sql = "SELECT * FROM affectedpeople";
 $stmt = $conn->query($sql);
-
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-$sql2 = "SELECT * FROM affectedpeople WHERE status='done'";
+$sql2 = "SELECT * FROM affectedpeople WHERE status='no'";
 $stmt1 = $conn->query($sql2);
-
 $rows2= $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
 $sql3 = "SELECT * FROM categoryname";
@@ -30,6 +28,130 @@ $sql4 = "SELECT * FROM disaster";
 $stmt4 =$conn->query($sql4);
 $disastera= $stmt4->fetchAll(PDO::FETCH_ASSOC);
 
+
+$sql5 = "SELECT * FROM budget";
+$stmt5 =$conn->query($sql5);
+$disastera= $stmt5->fetchAll(PDO::FETCH_ASSOC);
+
+$sql6 = "SELECT * FROM expense";
+$stmt6 =$conn->query($sql6);
+$disastera= $stmt6->fetchAll(PDO::FETCH_ASSOC);
+
+//donation
+$sql7 = "SELECT * FROM eachdonation";
+$stmt7 =$conn->query($sql7);
+$donation= $stmt7->fetch(PDO::FETCH_ASSOC);
+
+$dd= $donation["donationtaka"];
+
+$budgetquery="SELECT SUM(budget) as value_sum FROM budget";
+$budget=$conn->query($budgetquery)->fetch(PDO::FETCH_ASSOC);
+
+$amountquery="SELECT SUM(amount) as value_sum FROM budget";
+$amount=$conn->query($amountquery)->fetch(PDO::FETCH_ASSOC);
+
+$afford= (int)$budget['value_sum']/(int)$dd;
+$affectquery="SELECT SUM(familyMember) as value_sum FROM affectedpeople";
+$totalpeople=$conn->query($affectquery)->fetch(PDO::FETCH_ASSOC);
+
+//total affected people
+$peopleaffect="SELECT count(id) as value_sum FROM affectedpeople";
+$affectedtotal=$conn->query($affectquery)->fetch(PDO::FETCH_ASSOC);
+
+$data=0;
+$medium=0;
+$low=0;
+$male = 0;
+$female = 0;
+$children = 0;
+$totaldata=0;
+
+
+$no=floor($afford);
+$sql = "SELECT * FROM affectedpeople  WHERE status='no' AND priority='high' ORDER BY familyMember DESC LIMIT $no ";
+$stmt = $conn->query($sql);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+if (count($rows)<$no)
+{
+    $medium=1;
+    $highcount=$no-count($rows);
+//    echo $highcount;
+    $sql2 = "SELECT * FROM affectedpeople  WHERE status='no' AND priority='medium' ORDER BY familyMember DESC LIMIT $highcount ";
+    $stmt2 = $conn->query($sql2);
+    $medium = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    if (count($medium)<$highcount)
+    {
+        $low=1;
+        $anotherhighcount=$highcount-count($medium);
+//        echo $anotherhighcount;
+        $sql3 = "SELECT * FROM affectedpeople  WHERE status='no' AND priority='low' ORDER BY familyMember DESC LIMIT $anotherhighcount ";
+        $stmt3 = $conn->query($sql3);
+        $low = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+$data=1;
+$totaldata = sizeof($rows);
+foreach ($rows as $row) {
+    $male = $male + $row['male'];
+    $female = $female + $row['female'];
+    $children = $children + $row['under_18'];
+
+}
+foreach ($medium as $row) {
+    $male = $male + $row['male'];
+    $female = $female + $row['female'];
+    $children = $children + $row['under_18'];
+
+}
+foreach ($low as $row) {
+    $male = $male + $row['male'];
+    $female = $female + $row['female'];
+    $children = $children + $row['under_18'];
+
+}
+if (isset($_POST['add'])) {
+    $sql = "UPDATE affectedpeople SET status=:status WHERE id=:id;)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(
+
+        ':id' => htmlentities($_POST['id']),
+        ':status' => "done",
+    ));
+    date_default_timezone_set("Asia/Dhaka");
+    $sql1= "INSERT INTO syslog (Action,time,id) VALUES(:action, :time,:id)";
+    $stmt1= $conn->prepare($sql1);
+    $stmt1->execute(array(
+        ':id'=>htmlentities($_SESSION['id']) ,
+        ':action'=>"Updated Ration Taka",
+        ':time'=>date("Y-m-d h:i:s"),
+//       ############# need to work on that addid..........#################
+    ));
+}
+if (floor($afford)<(int)$affectedtotal['value_sum'])
+{
+    $lackings=floor($afford)-(int)$affectedtotal['value_sum'];
+}
+else
+{
+    $lackings=0;
+}
+
+echo "eita".$lackings;
+if (isset($_POST['donation']))
+{
+    $number=$_POST['updatedonation'];
+    $sql = "UPDATE eachdonation SET donationtaka=:donation WHERE id=1;)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(
+        ":donation"=>htmlentities($number)
+
+    ));
+    header("location:rationCalculator.php");
+    return;
+}
 ?>
 
 <!DOCTYPE html>
@@ -88,62 +210,16 @@ $disastera= $stmt4->fetchAll(PDO::FETCH_ASSOC);
                     <p>Welcome to your relief dashboard</p>
                 </div>
             </div>
-            <h3 class="alert alert-danger col-12 text-center"> Current disaster:: <?php foreach ($disastera as $disaster)
-                {
-                    echo $disaster['disasterName'];
-                }?>
-            </h3>
             <!-- MAIN CARDS STARTS HERE -->
-            <div class="main--cards">
-                <div class="card">
-                    <i
-                        class="fas fa-money-bill-alt fa-2x text-green"
-                        aria-hidden="true"
-                    ></i>
-                    <div class="card_inner">
-                        <p class="text-primary-p">Total Budget</p>
-                        <span class="font-bold text-title"><?php echo"578" ?></span>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <i class="fas fa-dollar-sign fa-2x text-red"></i>
-                    <div class="card_inner">
-                        <p class="text-primary-p">Expense</p>
-                        <span class="font-bold text-title"><?php echo"578" ?></span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <i class="fas fa-exclamation-triangle text-yellow fa-2x"></i>
-                    <div class="card_inner">
-                        <p class="text-primary-p">Total Affected People</p>
-                        <span class="font-bold text-title"><?php echo"578" ?></span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <i
-                        class="fas fa-thumbs-up fa-2x text-green"
-                        aria-hidden="true"
-                    ></i>
-                    <div class="card_inner">
-                        <p class="text-primary-p">Total distribution</p>
-                        <span class="font-bold text-title"><?php echo"578" ?></span>
-                    </div>
-                </div>
-            </div>
             <!-- MAIN CARDS ENDS HERE -->
             <!--            charts start here 3 charts#includeaffectedPeople (Gender) Relief(total distribution,nested totalexpense,)Category(need some improvise)-->
-            <div class="chart row row-cols-4">
-                <div class="firstChart col-sm-4 col-4">
+            <div class="chart row">
+                <div class="firstChart col-sm-6 col-6">
                     <canvas id="myChart"></canvas>
                 </div>
-                <div class="secondChart col-sm-4 col-4">
+                <div class="secondChart col-sm-6 col-6">
                     <canvas id="myChart1"></canvas>
-                </div>
-                <div class="thirdChart col-2 col-sm-4 col-4">
-                    <canvas id="myChart2"></canvas>
                 </div>
             </div>
             <!--        charts end here-->
@@ -155,111 +231,135 @@ $disastera= $stmt4->fetchAll(PDO::FETCH_ASSOC);
             <div class="table affectedPeople" style="overflow-x:auto;">
                 <div class="tableName">
                     <p class="labelAffected">Table: Affected people list</p>
-                    <form method="post" class="search">
-                        <input type="search">
-                        <button type="submit">Search</button>
-                    </form>
+
+
                 </div>
+
                 <table class="table table-hover">
                     <thead>
+                    <form method="POST" style="border: solid black 2px;">
+                        <label for="donation">Relief Taka Distribution Amount:</label>
+                        <input name="updatedonation" value="<?php echo $donation['donationtaka']?>" id="donation" type="text" >
+                        <button name="donation" class="btn btn-info">Update</button>
+                    </form>
+                    <p class="alert alert-info text-center">We Can afford <?php echo floor($afford )?> Family</p>
                     <tr>
                         <th scope="col">Division</th>
                         <th scope="col">District</th>
+                        <th scope="col">Upazilla</th>
                         <th scope="col">Thana</th>
-                        <th scope="col">householding</th>
-                        <th scope="col">Contact_no </th>
+                        <th scope="col">House Holding</th>
+                        <th scope="col">Family Member</th>
+                        <th scope="col">Contact No</th>
+                        <th scope="col">Male</th>
+                        <th scope="col">Female</th>
+                        <th scope="col">Under_18</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Action</th>
+
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($rows as $row)
+                    <?php
+                    if ($data>=1) {
+                        foreach ($rows as $row) {
+                            ?>
+                            <tr>
+                                <td><?php echo $row['division']; ?></td>
+                                <td><?php echo $row['district']; ?></td>
+                                <td><?php echo $row['jilla']; ?></td>
+                                <td><?php echo $row['thana']; ?></td>
+                                <td><?php echo $row['householding']; ?></td>
+                                <td><?php echo $row['familyMember']; ?></td>
+                                <td><?php echo $row['contact_no']; ?></td>
+                                <td><?php echo $row['male']; ?></td>
+                                <td><?php echo $row['female']; ?></td>
+                                <td><?php echo $row['under_18']; ?></td>
+                                <td><?php echo $row['Priority']; ?></td>
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="id">
+                                        <button name="add" class="btn-info" type="submit">Relief_Given</button>
+                                    </form>
+                                </td>
+
+
+                            </tr>
+                        <?php } }
+                    else
                     {
-                        echo "<tr><td>";
-                        echo(htmlentities($row['division']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['district']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['thana']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['householding']));;
-                        echo " </td><td>";
-                        echo (htmlentities($row['contact_no']));
-                        echo " </td><td>";
+                        echo "<p> no data here </p>";
                     }
                     ?>
-                </table>
-            </div>
-            <hr>
-            <div class="table reliefNeeded" style="overflow-x:auto;">
-                <div class="tableName">
-                    <p class="labelAffected">Table:Distribution</p>
-                    <form method="post" class="search">
-                        <input type="search" placeholder="type here">
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
+                    <!--                    //medium data-->
+                    <?php
+                    if ($medium>=1) {
+                        foreach ($medium as $row) {
+                            ?>
+                            <tr>
+                                <td><?php echo $row['division']; ?></td>
+                                <td><?php echo $row['district']; ?></td>
+                                <td><?php echo $row['jilla']; ?></td>
+                                <td><?php echo $row['thana']; ?></td>
+                                <td><?php echo $row['householding']; ?></td>
+                                <td><?php echo $row['familyMember']; ?></td>
+                                <td><?php echo $row['contact_no']; ?></td>
+                                <td><?php echo $row['male']; ?></td>
+                                <td><?php echo $row['female']; ?></td>
+                                <td><?php echo $row['under_18']; ?></td>
+                                <td><?php echo $row['Priority']; ?></td>
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="id">
+                                        <button name="add" class="btn-info" type="submit">Relief_Given</button>
+                                    </form>
+                                </td>
 
-                        <th scope="col">Division</th>
-                        <th scope="col">District</th>
-                        <th scope="col">Thana</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">householding</th>
-                        <th scope="col">Contact_no </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($rows2 as $row)
+
+                            </tr>
+                        <?php } }
+                    else
                     {
-                        echo "<tr><td>";
-                        echo(htmlentities($row['division']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['district']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['thana']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['name']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['householding']));;
-                        echo " </td><td>";
-                        echo (htmlentities($row['contact_no']));
-
-                        echo "</td></tr>";
+                        echo "<p> no data here </p>";
                     }
                     ?>
+                    <!--                    low data here-->
+                    <?php
+                    if ($low>=1) {
+                        foreach ($low as $row) {
+                            ?>
+                            <tr>
+                                <td><?php echo $row['division']; ?></td>
+                                <td><?php echo $row['district']; ?></td>
+                                <td><?php echo $row['jilla']; ?></td>
+                                <td><?php echo $row['thana']; ?></td>
+                                <td><?php echo $row['householding']; ?></td>
+                                <td><?php echo $row['familyMember']; ?></td>
+                                <td><?php echo $row['contact_no']; ?></td>
+                                <td><?php echo $row['male']; ?></td>
+                                <td><?php echo $row['female']; ?></td>
+                                <td><?php echo $row['under_18']; ?></td>
+                                <td><?php echo $row['Priority']; ?></td>
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" value="<?php echo $row['id'] ?>" name="id">
+                                        <button name="add" class="btn-info" type="submit">Relief_Given</button>
+                                    </form>
+                                </td>
+
+
+                            </tr>
+                        <?php } }
+                    else
+                    {
+                        echo "<p> no data here </p>";
+                    }
+                    ?>
+
                     </tbody>
                 </table>
             </div>
             <hr>
-            <div class="table reliefCategory" style="overflow-x:auto;">
-                <div class="tableName">
-                    <p class="labelAffected">Table: Category</p>
-                    <form method="post" class="search">
-                        <input type="search" placeholder="type here">
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($rows3 as $row)
-                    {
-                        echo "<tr><td>";
-                        echo(htmlentities($row['id']));
-                        echo " </td><td>";
-                        echo (htmlentities($row['catname']));
-                        echo " </td><td>";
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
 
         </div>
 
@@ -359,8 +459,48 @@ $disastera= $stmt4->fetchAll(PDO::FETCH_ASSOC);
 <script defer src="css/font/js/all.js"></script>
 <script src="boot/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="js/reliefMainPagechart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
 
+        // The data for our dataset
+        data: {
+            labels: ['Budget', 'Amount', 'Total-People', 'Lackings'],
+            datasets: [{
+                label: 'Basic Data',
+                backgroundColor: 'rgb(132, 160, 124)',
+                borderColor: 'rgb(132, 160, 124)',
+                data: [<?php echo $budget['value_sum']?>, <?php echo $amount['value_sum']?>, <?php echo $totalpeople['value_sum']?>, <?php echo $lackings?>]
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
+<script>
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: ['Budget', 'Amount', 'Total-People', 'Lackings'],
+            datasets: [{
+                label: 'Ration Data',
+                backgroundColor: ['rgb(87, 93, 144)','rgb(89, 95, 114)','rgb(132, 160, 124)','rgb(195, 211, 80)'],
+                borderColor: 'rgb(89, 95, 114)',
+                data: [<?php echo $budget['value_sum']?>, <?php echo $amount['value_sum']?>, <?php echo $totalpeople['value_sum']?>, <?php echo $lackings?>]
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
 </body>
 </html>
 
